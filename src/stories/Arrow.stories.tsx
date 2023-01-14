@@ -23,12 +23,17 @@ export const HighlightedArrow = () => {
     y: 300,
   };
 
+  function handleMouseDown(e) {
+    console.log("mouse down");
+  }
+
   return (
     <Arrow
       startPoint={startPoint}
       endPoint={endPoint}
       isHighlighted={isHighlighted(true)}
       showDebugGuideLines={showDebugGuideLines()}
+      onMouseDown={(e) => handleMouseDown(e)}
     />
   );
 };

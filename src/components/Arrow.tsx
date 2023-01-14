@@ -36,6 +36,7 @@ type Props = {
   onMouseEnter?: (e: React.MouseEvent) => void;
   onMouseLeave?: (e: React.MouseEvent) => void;
   onClick?: (e: React.MouseEvent) => void;
+  onMouseDown? : (e: React.MouseEvent) => void;
   config?: ArrowConfig;
   tooltip?: string;
 };
@@ -156,6 +157,7 @@ export const Arrow = ({
   onMouseEnter,
   onMouseLeave,
   onClick,
+  onMouseDown,
   config,
   tooltip,
 }: Props) => {
@@ -255,6 +257,7 @@ export const Arrow = ({
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           onClick={onClick}
+          onMouseDown={onMouseDown}
         >
           {tooltip && <title>{tooltip}</title>}
         </HoverableLine>
@@ -273,6 +276,7 @@ export const Arrow = ({
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           onClick={onClick}
+          onMouseDown={onMouseDown}
         >
           {tooltip && <title>{tooltip}</title>}
         </HoverableArrowHeadEnding>
