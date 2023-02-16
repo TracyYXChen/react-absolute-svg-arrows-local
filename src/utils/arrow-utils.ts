@@ -5,8 +5,8 @@
 
 import { Point } from "../types/Point";
 
-const MAX_Y_CONTROL_POINT_SHIFT = 50;
-const MAX_X_CONTROL_POINT_SHIFT = 10;
+const MAX_Y_CONTROL_POINT_SHIFT = 0;
+const MAX_X_CONTROL_POINT_SHIFT = 0;
 
 // Y coordinates of our control points are moved in case of low delta Y to prevent lines overlapping.
 // Sign flips the curve depending on delta Y.
@@ -90,8 +90,8 @@ export const calculateFixedLineInflectionConstant = (
   absDx: number,
   absDy: number
 ) => {
-  const WEIGHT_X = 4;
-  const WEIGHT_Y = 0.8;
+  const WEIGHT_X = 0;
+  const WEIGHT_Y = 0;
 
   return Math.round(Math.sqrt(absDx) * WEIGHT_X + Math.sqrt(absDy) * WEIGHT_Y);
 };
