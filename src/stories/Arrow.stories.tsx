@@ -65,7 +65,7 @@ export const ArrowInOneLine = () => {
   };
   const endPoint1 = {
     x: 100,
-    y: 120,
+    y: 420,
   };
 
   const startPoint2 = {

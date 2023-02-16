@@ -48,7 +48,7 @@ describe('calculateDeltas', () => {
 });
 
 describe('calculateLowDyControlPointShift', () => {
-  const MAX_Y_CONTROL_POINT_SHIFT = 50;
+  const MAX_Y_CONTROL_POINT_SHIFT = 0;
 
   test.each`
     dx     | dy      | expected
