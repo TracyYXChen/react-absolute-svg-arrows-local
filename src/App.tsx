@@ -11,7 +11,7 @@ type ArrowProps = {
   endPoint: Point 
 }
 
-const MAX_Y_CONTROL_POINT_SHIFT = 0;
+const MAX_Y_CONTROL_POINT_SHIFT = 0.01;
 
 export const calculateLowDyControlPointShift = (
   dx: number,
