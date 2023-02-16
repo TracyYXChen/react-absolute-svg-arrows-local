@@ -55,8 +55,8 @@ const calculateFixedLineInflectionConstant = (
   absDx: number,
   absDy: number,
 ) => {
-  const WEIGHT_X = 4;
-  const WEIGHT_Y = 0.8;
+  const WEIGHT_X = 0;
+  const WEIGHT_Y = 0;
 
   return Math.round(Math.sqrt(absDx) * WEIGHT_X + Math.sqrt(absDy) * WEIGHT_Y);
 };
