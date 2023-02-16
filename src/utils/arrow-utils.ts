@@ -5,7 +5,7 @@
 
 import { Point } from "../types/Point";
 
-const MAX_Y_CONTROL_POINT_SHIFT = 50;
+const MAX_Y_CONTROL_POINT_SHIFT = 0;
 const MAX_X_CONTROL_POINT_SHIFT = 10;
 
 // Y coordinates of our control points are moved in case of low delta Y to prevent lines overlapping.
@@ -37,7 +37,7 @@ const MAX_X_CONTROL_POINT_SHIFT = 10;
 export const calculateLowDyControlPointShift = (
   dx: number,
   dy: number,
-  maxShift = 0
+  maxShift = MAX_Y_CONTROL_POINT_SHIFT
 ) => {
   if (dx > 0) return 0;
   const sign = dy < 0 ? -1 : 1;
