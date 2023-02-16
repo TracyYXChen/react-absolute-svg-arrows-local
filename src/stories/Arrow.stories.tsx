@@ -23,9 +23,9 @@ export const HighlightedArrow = () => {
     y: 300,
   };
 
-  function handleMouseDown(e) {
-    console.log("mouse down");
-  }
+  // function handleMouseDown(e) {
+  //   console.log("mouse down");
+  // }
 
   return (
     <Arrow
@@ -33,7 +33,6 @@ export const HighlightedArrow = () => {
       endPoint={endPoint}
       isHighlighted={isHighlighted(true)}
       showDebugGuideLines={showDebugGuideLines()}
-      onMouseDown={(e) => handleMouseDown(e)}
     />
   );
 };
@@ -65,7 +64,7 @@ export const ArrowInOneLine = () => {
   };
   const endPoint1 = {
     x: 100,
-    y: 120,
+    y: 420,
   };
 
   const startPoint2 = {

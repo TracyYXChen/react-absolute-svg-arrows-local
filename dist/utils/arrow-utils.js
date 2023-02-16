@@ -5,7 +5,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.calculateControlPoints = exports.calculateControlPointsWithoutBoundingBox = exports.calculateFixedLineInflectionConstant = exports.calculateCanvasDimensions = exports.calculateDeltas = exports.calculateLowDyControlPointShift = void 0;
-var MAX_Y_CONTROL_POINT_SHIFT = 50;
+var MAX_Y_CONTROL_POINT_SHIFT = 0;
 var MAX_X_CONTROL_POINT_SHIFT = 10;
 // Y coordinates of our control points are moved in case of low delta Y to prevent lines overlapping.
 // Sign flips the curve depending on delta Y.

@@ -6,7 +6,7 @@
 import { Point } from "../types/Point";
 
 const MAX_Y_CONTROL_POINT_SHIFT = 0;
-const MAX_X_CONTROL_POINT_SHIFT = 0;
+const MAX_X_CONTROL_POINT_SHIFT = 10;
 
 // Y coordinates of our control points are moved in case of low delta Y to prevent lines overlapping.
 // Sign flips the curve depending on delta Y.
@@ -33,6 +33,7 @@ const MAX_X_CONTROL_POINT_SHIFT = 0;
 //      |           +          +           +          +           +          |
 // -0.2 +--------------------------------------------------------------------+
 // -100         -50         0           50        100         150        200
+//MAX_Y_CONTROL_POINT_SHIFT
 export const calculateLowDyControlPointShift = (
   dx: number,
   dy: number,
@@ -90,6 +91,7 @@ export const calculateFixedLineInflectionConstant = (
   absDx: number,
   absDy: number
 ) => {
+  //X: 4, Y: 0.8
   const WEIGHT_X = 0;
   const WEIGHT_Y = 0;
 
@@ -181,15 +183,16 @@ export const calculateControlPoints = ({
   const leftBorder = Math.min(p1.x, p2.x, p3.x, p4.x);
   const rightBorder = Math.max(p1.x, p2.x, p3.x, p4.x);
 
-  const verticalBuffer =
+  const verticalBuffer = 
     (bottomBorder - topBorder - absDy) / 2 + boundingBoxElementsBuffer;
-  const horizontalBuffer =
+  const horizontalBuffer = 
     (rightBorder - leftBorder - absDx) / 2 + boundingBoxElementsBuffer;
 
   const boundingBoxBuffer = {
     vertical: verticalBuffer,
     horizontal: horizontalBuffer,
   };
+  console.log(boundingBoxBuffer);
 
   return {
     p1: {
