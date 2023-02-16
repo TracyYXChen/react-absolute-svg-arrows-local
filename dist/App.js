@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.calculateCanvasDimensions = exports.calculateControlPointsWithBuffer = exports.calculateControlPoints = exports.calculateDeltas = exports.calculateLowDyControlPointShift = void 0;
 var react_1 = __importDefault(require("react"));
-var MAX_Y_CONTROL_POINT_SHIFT = 50;
+var MAX_Y_CONTROL_POINT_SHIFT = 0;
 var calculateLowDyControlPointShift = function (dx, dy, maxShift) {
     if (maxShift === void 0) { maxShift = MAX_Y_CONTROL_POINT_SHIFT; }
     if (dx > 0)

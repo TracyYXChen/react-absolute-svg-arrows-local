@@ -44,7 +44,7 @@ describe('calculateDeltas', function () {
     });
 });
 describe('calculateLowDyControlPointShift', function () {
-    var MAX_Y_CONTROL_POINT_SHIFT = 50;
+    var MAX_Y_CONTROL_POINT_SHIFT = 0;
     test.each(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    dx     | dy      | expected\n    ", "  | ", "   | ", "\n    ", " | ", " | ", "\n    ", " | ", " | ", "\n    ", " | ", " | ", "\n    ", " | ", "  | ", "\n    ", " | ", "    | ", "\n    ", " | ", "   | ", "\n    ", " | ", "  | ", "\n    ", " | ", "  | ", "\n    ", " | ", "  | ", "\n  "], ["\n    dx     | dy      | expected\n    ", "  | ", "   | ", "\n    ", " | ", " | ", "\n    ", " | ", " | ", "\n    ", " | ", " | ", "\n    ", " | ", "  | ", "\n    ", " | ", "    | ", "\n    ", " | ", "   | ", "\n    ", " | ", "  | ", "\n    ", " | ", "  | ", "\n    ", " | ", "  | ", "\n  "])), 10, 10, 0, -10, -300, 0, -10, -200, -1, -10, -100, -26, -10, -10, -44, -10, 0, 45, -10, 10, 44, -10, 100, 26, -10, 200, 1, -10, 300, 0)("calculates control low dY point shift when dx = $dx and dy = $dy", function (_a) {
         var dx = _a.dx, dy = _a.dy, expected = _a.expected;
         expect(arrow_utils_1.calculateLowDyControlPointShift(dx, dy, MAX_Y_CONTROL_POINT_SHIFT)).toBe(expected);
