@@ -33,10 +33,11 @@ const MAX_X_CONTROL_POINT_SHIFT = 10;
 //      |           +          +           +          +           +          |
 // -0.2 +--------------------------------------------------------------------+
 // -100         -50         0           50        100         150        200
+//MAX_Y_CONTROL_POINT_SHIFT
 export const calculateLowDyControlPointShift = (
   dx: number,
   dy: number,
-  maxShift = MAX_Y_CONTROL_POINT_SHIFT
+  maxShift = 0
 ) => {
   if (dx > 0) return 0;
   const sign = dy < 0 ? -1 : 1;
