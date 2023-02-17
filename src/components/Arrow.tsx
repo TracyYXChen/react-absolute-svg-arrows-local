@@ -162,7 +162,8 @@ export const Arrow = ({
   tooltip,
 }: Props) => {
   const defaultConfig = {
-    arrowColor: "#bcc4cc",
+    //"#bcc4cc"
+    arrowColor: 'red',
     arrowHighlightedColor: "#4da6ff",
     controlPointsColor: "#ff4747",
     boundingBoxColor: "#ffcccc",

@@ -33,6 +33,7 @@ export const HighlightedArrow = () => {
       endPoint={endPoint}
       isHighlighted={isHighlighted(true)}
       showDebugGuideLines={showDebugGuideLines()}
+      config={{arrowColor: 'red'}}
     />
   );
 };
@@ -53,6 +54,7 @@ export const InversedArrow = () => {
       endPoint={endPoint}
       isHighlighted={isHighlighted()}
       showDebugGuideLines={showDebugGuideLines()}
+      config={{arrowColor: 'red'}}
     />
   );
 };
@@ -120,7 +122,7 @@ export const ArrowWithCustomConfig = () => {
   };
 
   const config = {
-    arrowColor: "green",
+    arrowColor: "red",
     arrowHighlightedColor: "black",
     dotEndingBackground: "pink",
     dotEndingRadius: 15,
@@ -176,7 +178,7 @@ export const Playground = () => {
   };
 
   const config = object("Custom config", {
-    arrowColor: "#bcc4cc",
+    arrowColor: "red",
     arrowHighlightedColor: "#4da6ff",
     controlPointsColor: "#fe4e4e",
     boundingBoxColor: "#fad1d1",

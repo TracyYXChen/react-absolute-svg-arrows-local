@@ -192,7 +192,7 @@ export const calculateControlPoints = ({
     vertical: verticalBuffer,
     horizontal: horizontalBuffer,
   };
-  console.log(boundingBoxBuffer);
+  //console.log(boundingBoxBuffer);
 
   return {
     p1: {
