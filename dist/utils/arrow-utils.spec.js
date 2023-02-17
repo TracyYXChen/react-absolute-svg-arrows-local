@@ -1,14 +1,12 @@
-"use strict";
 var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
     if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
     return cooked;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Copyright (c) ProductBoard, Inc.
  * All rights reserved.
  */
-var arrow_utils_1 = require("./arrow-utils");
+import { calculateDeltas, calculateLowDyControlPointShift, calculateFixedLineInflectionConstant, calculateCanvasDimensions, calculateControlPointsWithoutBoundingBox, calculateControlPoints, } from './arrow-utils';
 describe('calculateDeltas', function () {
     it('calculates deltas', function () {
         var sourcePoint = {
@@ -19,7 +17,7 @@ describe('calculateDeltas', function () {
             x: 100,
             y: 200,
         };
-        expect(arrow_utils_1.calculateDeltas(sourcePoint, targetPoint)).toEqual({
+        expect(calculateDeltas(sourcePoint, targetPoint)).toEqual({
             absDx: 100,
             absDy: 200,
             dx: 100,
@@ -35,7 +33,7 @@ describe('calculateDeltas', function () {
             x: -100,
             y: -100,
         };
-        expect(arrow_utils_1.calculateDeltas(sourcePoint, targetPoint)).toEqual({
+        expect(calculateDeltas(sourcePoint, targetPoint)).toEqual({
             absDx: 200,
             absDy: 300,
             dx: -200,
@@ -47,18 +45,18 @@ describe('calculateLowDyControlPointShift', function () {
     var MAX_Y_CONTROL_POINT_SHIFT = 0;
     test.each(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    dx     | dy      | expected\n    ", "  | ", "   | ", "\n    ", " | ", " | ", "\n    ", " | ", " | ", "\n    ", " | ", " | ", "\n    ", " | ", "  | ", "\n    ", " | ", "    | ", "\n    ", " | ", "   | ", "\n    ", " | ", "  | ", "\n    ", " | ", "  | ", "\n    ", " | ", "  | ", "\n  "], ["\n    dx     | dy      | expected\n    ", "  | ", "   | ", "\n    ", " | ", " | ", "\n    ", " | ", " | ", "\n    ", " | ", " | ", "\n    ", " | ", "  | ", "\n    ", " | ", "    | ", "\n    ", " | ", "   | ", "\n    ", " | ", "  | ", "\n    ", " | ", "  | ", "\n    ", " | ", "  | ", "\n  "])), 10, 10, 0, -10, -300, 0, -10, -200, -1, -10, -100, -26, -10, -10, -44, -10, 0, 45, -10, 10, 44, -10, 100, 26, -10, 200, 1, -10, 300, 0)("calculates control low dY point shift when dx = $dx and dy = $dy", function (_a) {
         var dx = _a.dx, dy = _a.dy, expected = _a.expected;
-        expect(arrow_utils_1.calculateLowDyControlPointShift(dx, dy, MAX_Y_CONTROL_POINT_SHIFT)).toBe(expected);
+        expect(calculateLowDyControlPointShift(dx, dy, MAX_Y_CONTROL_POINT_SHIFT)).toBe(expected);
     });
 });
 describe('calculateFixedLineInflectionConstant', function () {
     test.each(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n    absDx    | absDy   | expected\n    ", "    | ", "   | ", "\n    ", "  | ", "   | ", "\n    ", "    | ", " | ", "\n    ", " | ", " | ", "\n  "], ["\n    absDx    | absDy   | expected\n    ", "    | ", "   | ", "\n    ", "  | ", "   | ", "\n    ", "    | ", " | ", "\n    ", " | ", " | ", "\n  "])), 10, 10, 15, 1000, 10, 129, 10, 1000, 38, 10000, 3000, 444)("calculates fixed line inflection constant when absDx = $absDx and absDy = $absDy", function (_a) {
         var absDx = _a.absDx, absDy = _a.absDy, expected = _a.expected;
-        expect(arrow_utils_1.calculateFixedLineInflectionConstant(absDx, absDy)).toBe(expected);
+        expect(calculateFixedLineInflectionConstant(absDx, absDy)).toBe(expected);
     });
 });
 describe('calculateCanvasDimensions', function () {
     it('calculates canvas dimensions with bounding box buffer', function () {
-        expect(arrow_utils_1.calculateCanvasDimensions({
+        expect(calculateCanvasDimensions({
             absDx: 1000,
             absDy: 100,
             boundingBoxBuffer: {
@@ -73,7 +71,7 @@ describe('calculateCanvasDimensions', function () {
 });
 describe('calculateControlPointsWithoutBoundingBox', function () {
     it('calculates control points without bounding box', function () {
-        expect(arrow_utils_1.calculateControlPointsWithoutBoundingBox({
+        expect(calculateControlPointsWithoutBoundingBox({
             absDx: 1000,
             absDy: 100,
             dx: 1000,
@@ -100,7 +98,7 @@ describe('calculateControlPointsWithoutBoundingBox', function () {
 });
 describe('calculateControlPoints', function () {
     it('calculates control points with bounding box', function () {
-        expect(arrow_utils_1.calculateControlPoints({
+        expect(calculateControlPoints({
             absDx: 1000,
             absDy: 100,
             dx: 1000,

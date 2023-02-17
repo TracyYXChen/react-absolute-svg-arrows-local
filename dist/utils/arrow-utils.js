@@ -1,10 +1,7 @@
-"use strict";
 /**
  * Copyright (c) ProductBoard, Inc.
  * All rights reserved.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.calculateControlPoints = exports.calculateControlPointsWithoutBoundingBox = exports.calculateFixedLineInflectionConstant = exports.calculateCanvasDimensions = exports.calculateDeltas = exports.calculateLowDyControlPointShift = void 0;
 var MAX_Y_CONTROL_POINT_SHIFT = 0;
 var MAX_X_CONTROL_POINT_SHIFT = 10;
 // Y coordinates of our control points are moved in case of low delta Y to prevent lines overlapping.
@@ -32,7 +29,8 @@ var MAX_X_CONTROL_POINT_SHIFT = 10;
 //      |           +          +           +          +           +          |
 // -0.2 +--------------------------------------------------------------------+
 // -100         -50         0           50        100         150        200
-var calculateLowDyControlPointShift = function (dx, dy, maxShift) {
+//MAX_Y_CONTROL_POINT_SHIFT
+export var calculateLowDyControlPointShift = function (dx, dy, maxShift) {
     if (maxShift === void 0) { maxShift = MAX_Y_CONTROL_POINT_SHIFT; }
     if (dx > 0)
         return 0;
@@ -43,30 +41,27 @@ var calculateLowDyControlPointShift = function (dx, dy, maxShift) {
         return 0;
     return sign * value;
 };
-exports.calculateLowDyControlPointShift = calculateLowDyControlPointShift;
-var calculateDeltas = function (startPoint, endPoint) {
+export var calculateDeltas = function (startPoint, endPoint) {
     var dx = endPoint.x - startPoint.x;
     var dy = endPoint.y - startPoint.y;
     var absDx = Math.abs(dx);
     var absDy = Math.abs(dy);
     return { dx: dx, dy: dy, absDx: absDx, absDy: absDy };
 };
-exports.calculateDeltas = calculateDeltas;
-var calculateCanvasDimensions = function (_a) {
+export var calculateCanvasDimensions = function (_a) {
     var absDx = _a.absDx, absDy = _a.absDy, boundingBoxBuffer = _a.boundingBoxBuffer;
     var canvasWidth = absDx + 2 * boundingBoxBuffer.horizontal;
     var canvasHeight = absDy + 2 * boundingBoxBuffer.vertical;
     return { canvasWidth: canvasWidth, canvasHeight: canvasHeight };
 };
-exports.calculateCanvasDimensions = calculateCanvasDimensions;
 // Curve flexure should remain on the same area no matter of absolute deltas, so we have to slightly shift X coordinates of our control points. It was created empirically, it's not based on a clear formula.
-var calculateFixedLineInflectionConstant = function (absDx, absDy) {
-    var WEIGHT_X = 4;
-    var WEIGHT_Y = 0.8;
+export var calculateFixedLineInflectionConstant = function (absDx, absDy) {
+    //X: 4, Y: 0.8
+    var WEIGHT_X = 0;
+    var WEIGHT_Y = 0;
     return Math.round(Math.sqrt(absDx) * WEIGHT_X + Math.sqrt(absDy) * WEIGHT_Y);
 };
-exports.calculateFixedLineInflectionConstant = calculateFixedLineInflectionConstant;
-var calculateControlPointsWithoutBoundingBox = function (_a) {
+export var calculateControlPointsWithoutBoundingBox = function (_a) {
     var _b, _c;
     var absDx = _a.absDx, absDy = _a.absDy, dx = _a.dx, dy = _a.dy;
     var leftTopX = 0;
@@ -77,9 +72,9 @@ var calculateControlPointsWithoutBoundingBox = function (_a) {
         _b = [rightBottomX, leftTopX], leftTopX = _b[0], rightBottomX = _b[1];
     if (dy < 0)
         _c = [rightBottomY, leftTopY], leftTopY = _c[0], rightBottomY = _c[1];
-    var fixedLineInflectionConstant = exports.calculateFixedLineInflectionConstant(absDx, absDy);
-    var lowDyYShift = exports.calculateLowDyControlPointShift(dx, dy);
-    var lowDyXShift = Math.abs(exports.calculateLowDyControlPointShift(dx, dy, MAX_X_CONTROL_POINT_SHIFT));
+    var fixedLineInflectionConstant = calculateFixedLineInflectionConstant(absDx, absDy);
+    var lowDyYShift = calculateLowDyControlPointShift(dx, dy);
+    var lowDyXShift = Math.abs(calculateLowDyControlPointShift(dx, dy, MAX_X_CONTROL_POINT_SHIFT));
     var p1 = {
         x: leftTopX,
         y: leftTopY,
@@ -98,10 +93,9 @@ var calculateControlPointsWithoutBoundingBox = function (_a) {
     };
     return { p1: p1, p2: p2, p3: p3, p4: p4 };
 };
-exports.calculateControlPointsWithoutBoundingBox = calculateControlPointsWithoutBoundingBox;
-var calculateControlPoints = function (_a) {
+export var calculateControlPoints = function (_a) {
     var boundingBoxElementsBuffer = _a.boundingBoxElementsBuffer, absDx = _a.absDx, absDy = _a.absDy, dx = _a.dx, dy = _a.dy;
-    var _b = exports.calculateControlPointsWithoutBoundingBox({
+    var _b = calculateControlPointsWithoutBoundingBox({
         absDx: absDx,
         absDy: absDy,
         dx: dx,
@@ -117,6 +111,7 @@ var calculateControlPoints = function (_a) {
         vertical: verticalBuffer,
         horizontal: horizontalBuffer,
     };
+    //console.log(boundingBoxBuffer);
     return {
         p1: {
             x: p1.x + horizontalBuffer,
@@ -137,4 +132,3 @@ var calculateControlPoints = function (_a) {
         boundingBoxBuffer: boundingBoxBuffer,
     };
 };
-exports.calculateControlPoints = calculateControlPoints;
