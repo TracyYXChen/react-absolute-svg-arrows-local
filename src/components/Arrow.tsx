@@ -161,6 +161,7 @@ export const Arrow = ({
   config,
   tooltip,
 }: Props) => {
+  console.log(startPoint, endPoint);
   const defaultConfig = {
     //"#bcc4cc"
     arrowColor: 'red',
@@ -169,7 +170,7 @@ export const Arrow = ({
     boundingBoxColor: "#ffcccc",
     dotEndingBackground: "#fff",
     dotEndingRadius: 3,
-    arrowHeadEndingSize: 9,
+    arrowHeadEndingSize: 29,
     hoverableLineWidth: 15,
     strokeWidth: 1,
   };
@@ -230,6 +231,62 @@ export const Arrow = ({
     return arrowColor;
   };
 
+  //pick an arrow direction
+
+  let arrDir = '';
+  if (startPoint.y === endPoint.y) {
+      if (startPoint.x < endPoint.x) {
+          arrDir = 'right';
+      }
+      else {
+          arrDir = 'left';
+      }
+  }
+
+  //the axis is upward and rightward
+  let k = (endPoint.y - startPoint.y) / (endPoint.x - startPoint.x);
+  console.log(k);
+  if (k < -1 || k > 1) {
+    if (endPoint.y > startPoint.y) {
+      arrDir = 'down'
+    }
+    else {
+      arrDir = 'up'
+    }
+  }
+  else {
+    if (endPoint.x > startPoint.x) {
+      arrDir = 'right'
+    }
+    else {
+      arrDir = 'left'
+    }
+  }
+  
+  let arrowPath = '';
+  if(arrDir === 'up') {
+    arrowPath = `M ${0}  ${arrowHeadEndingSize}
+      L ${arrowHeadEndingSize * 4 / 5 } ${arrowHeadEndingSize * 2 / 5} 
+      L ${arrowHeadEndingSize * 8 / 5} ${arrowHeadEndingSize}`;
+  }
+  else if(arrDir === 'down') {
+    arrowPath = `M ${0}  ${arrowHeadEndingSize * 2 / 5}
+    L ${arrowHeadEndingSize * 4 / 5 } ${arrowHeadEndingSize * 3 / 5} 
+    L ${arrowHeadEndingSize * 8 / 5} ${arrowHeadEndingSize * 2 / 5}`;
+  }
+  else if(arrDir === 'right') {
+    arrowPath = `M ${(arrowHeadEndingSize / 5) * 4} 0
+      L ${arrowHeadEndingSize} ${arrowHeadEndingSize / 2}
+      L ${(arrowHeadEndingSize / 5) * 4} ${arrowHeadEndingSize}`;
+  }
+  else if(arrDir === 'left') {
+    arrowPath = `M ${arrowHeadEndingSize * 6 / 5 } 0
+      L ${arrowHeadEndingSize * 4 / 5} ${arrowHeadEndingSize / 2}
+      L ${arrowHeadEndingSize * 6 / 5 } ${arrowHeadEndingSize}`;
+  }
+  console.log("p4", p4.x, p4.y);
+  console.log("end point", endPoint.x, endPoint.y);
+
   const strokeColor = getStrokeColor();
 
   return (
@@ -263,10 +320,7 @@ export const Arrow = ({
           {tooltip && <title>{tooltip}</title>}
         </HoverableLine>
         <HoverableArrowHeadEnding
-          d={`
-            M ${(arrowHeadEndingSize / 5) * 2} 0
-            L ${arrowHeadEndingSize} ${arrowHeadEndingSize / 2}
-            L ${(arrowHeadEndingSize / 5) * 2} ${arrowHeadEndingSize}`}
+          d={arrowPath}
           fill="none"
           stroke="transparent"
           strokeWidth={hoverableLineWidth}
@@ -308,14 +362,13 @@ export const Arrow = ({
           fill={dotEndingBackground}
         />
         <ArrowHeadEnding
-          d={`
-            M ${(arrowHeadEndingSize / 5) * 2} 0
-            L ${arrowHeadEndingSize} ${arrowHeadEndingSize / 2}
-            L ${(arrowHeadEndingSize / 5) * 2} ${arrowHeadEndingSize}`}
+          d={arrowPath}
           fill="none"
           stroke={strokeColor}
           strokeWidth={strokeWidth}
           strokeLinecap="round"
+          //$xTranslate={p4.x - arrowHeadOffset * 2}
+          //$yTranslate={p4.y - arrowHeadOffset}
           $xTranslate={p4.x - arrowHeadOffset * 2}
           $yTranslate={p4.y - arrowHeadOffset}
         />

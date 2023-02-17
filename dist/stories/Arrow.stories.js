@@ -44,16 +44,16 @@ export var ArrowInOneLine = function () {
         y: 100,
     };
     var endPoint1 = {
-        x: 100,
+        x: 600,
         y: 420,
     };
     var startPoint2 = {
-        x: 600,
+        x: 400,
         y: 200,
     };
     var endPoint2 = {
-        x: 100,
-        y: 180,
+        x: 400,
+        y: 100,
     };
     var startPoint3 = {
         x: 100,

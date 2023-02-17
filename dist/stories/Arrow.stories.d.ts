@@ -2,7 +2,6 @@
  * Copyright (c) ProductBoard, Inc.
  * All rights reserved.
  */
-/// <reference types="react" />
 export declare const HighlightedArrow: () => JSX.Element;
 export declare const InversedArrow: () => JSX.Element;
 export declare const ArrowInOneLine: () => JSX.Element;
