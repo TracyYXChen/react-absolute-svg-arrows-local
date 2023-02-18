@@ -199,8 +199,7 @@ const Arrow = ({ startPoint, endPoint }: ArrowProps) => {
     y: Math.min(startPoint.y, endPoint.y)
   }
 
-  // const canvasWidth = Math.abs(endPoint.x - startPoint.x)
-  // const canvasHeight = Math.abs(endPoint.y - startPoint.y)
+  
 
   
   const { absDx, absDy, dx, dy } = calculateDeltas(startPoint, endPoint);
@@ -230,6 +229,58 @@ const { p1, p2, p3, p4, boundingBoxBuffer } = calculateControlPointsWithBuffer({
   const canvasYOffset =
     Math.min(startPoint.y, endPoint.y) - boundingBoxBuffer.vertical;
 
+
+    let arrDir = '';
+    if (startPoint.y === endPoint.y) {
+        if (startPoint.x < endPoint.x) {
+            arrDir = 'right';
+        }
+        else {
+            arrDir = 'left';
+        }
+    }
+  
+    //the axis is upward and rightward
+    let k = (endPoint.y - startPoint.y) / (endPoint.x - startPoint.x);
+    if (k < -1 || k > 1) {
+      if (endPoint.y > startPoint.y) {
+        arrDir = 'down'
+      }
+      else {
+        arrDir = 'up'
+      }
+    }
+    else {
+      if (endPoint.x > startPoint.x) {
+        arrDir = 'right'
+      }
+      else {
+        arrDir = 'left'
+      }
+    }
+    
+    let arrowPath = '';
+    if(arrDir === 'up') {
+      arrowPath = `M ${0}  ${arrowHeadEndingSize}
+        L ${arrowHeadEndingSize * 4 / 5 } ${arrowHeadEndingSize * 2 / 5} 
+        L ${arrowHeadEndingSize * 8 / 5} ${arrowHeadEndingSize}`;
+    }
+    else if(arrDir === 'down') {
+      arrowPath = `M ${0}  ${arrowHeadEndingSize * 2 / 5}
+      L ${arrowHeadEndingSize * 4 / 5 } ${arrowHeadEndingSize * 3 / 5} 
+      L ${arrowHeadEndingSize * 8 / 5} ${arrowHeadEndingSize * 2 / 5}`;
+    }
+    else if(arrDir === 'right') {
+      arrowPath = `M ${(arrowHeadEndingSize / 5) * 4} 0
+        L ${arrowHeadEndingSize} ${arrowHeadEndingSize / 2}
+        L ${(arrowHeadEndingSize / 5) * 4} ${arrowHeadEndingSize}`;
+    }
+    else if(arrDir === 'left') {
+      arrowPath = `M ${arrowHeadEndingSize * 6 / 5 } 0
+        L ${arrowHeadEndingSize * 4 / 5} ${arrowHeadEndingSize / 2}
+        L ${arrowHeadEndingSize * 6 / 5 } ${arrowHeadEndingSize}`;
+    }
+
   return (
     <svg
       width={canvasWidth}
@@ -254,10 +305,7 @@ const { p1, p2, p3, p4, boundingBoxBuffer } = calculateControlPointsWithBuffer({
       />
 
 <path
-  d={`
-  M ${(arrowHeadEndingSize / 5) * 2} 0
-  L ${arrowHeadEndingSize} ${arrowHeadEndingSize / 2}
-  L ${(arrowHeadEndingSize / 5) * 2} ${arrowHeadEndingSize}`}
+  d={arrowPath}
   fill="none"
   stroke="black"
   style={{ transform: `translate(${p4.x - arrowHeadEndingSize}px, ${p4.y - arrowHeadEndingSize / 2}px)` }}

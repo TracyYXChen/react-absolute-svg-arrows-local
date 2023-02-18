@@ -116,8 +116,6 @@ var Arrow = function (_a) {
         x: Math.min(startPoint.x, endPoint.x),
         y: Math.min(startPoint.y, endPoint.y)
     };
-    // const canvasWidth = Math.abs(endPoint.x - startPoint.x)
-    // const canvasHeight = Math.abs(endPoint.y - startPoint.y)
     var _b = calculateDeltas(startPoint, endPoint), absDx = _b.absDx, absDy = _b.absDy, dx = _b.dx, dy = _b.dy;
     var strokeWidth = 1;
     var arrowHeadEndingSize = 10;
@@ -137,10 +135,50 @@ var Arrow = function (_a) {
     }), canvasWidth = _d.canvasWidth, canvasHeight = _d.canvasHeight;
     var canvasXOffset = Math.min(startPoint.x, endPoint.x) - boundingBoxBuffer.horizontal;
     var canvasYOffset = Math.min(startPoint.y, endPoint.y) - boundingBoxBuffer.vertical;
+    var arrDir = '';
+    if (startPoint.y === endPoint.y) {
+        if (startPoint.x < endPoint.x) {
+            arrDir = 'right';
+        }
+        else {
+            arrDir = 'left';
+        }
+    }
+    //the axis is upward and rightward
+    var k = (endPoint.y - startPoint.y) / (endPoint.x - startPoint.x);
+    if (k < -1 || k > 1) {
+        if (endPoint.y > startPoint.y) {
+            arrDir = 'down';
+        }
+        else {
+            arrDir = 'up';
+        }
+    }
+    else {
+        if (endPoint.x > startPoint.x) {
+            arrDir = 'right';
+        }
+        else {
+            arrDir = 'left';
+        }
+    }
+    var arrowPath = '';
+    if (arrDir === 'up') {
+        arrowPath = "M ".concat(0, "  ").concat(arrowHeadEndingSize, "\n        L ").concat(arrowHeadEndingSize * 4 / 5, " ").concat(arrowHeadEndingSize * 2 / 5, " \n        L ").concat(arrowHeadEndingSize * 8 / 5, " ").concat(arrowHeadEndingSize);
+    }
+    else if (arrDir === 'down') {
+        arrowPath = "M ".concat(0, "  ").concat(arrowHeadEndingSize * 2 / 5, "\n      L ").concat(arrowHeadEndingSize * 4 / 5, " ").concat(arrowHeadEndingSize * 3 / 5, " \n      L ").concat(arrowHeadEndingSize * 8 / 5, " ").concat(arrowHeadEndingSize * 2 / 5);
+    }
+    else if (arrDir === 'right') {
+        arrowPath = "M ".concat((arrowHeadEndingSize / 5) * 4, " 0\n        L ").concat(arrowHeadEndingSize, " ").concat(arrowHeadEndingSize / 2, "\n        L ").concat((arrowHeadEndingSize / 5) * 4, " ").concat(arrowHeadEndingSize);
+    }
+    else if (arrDir === 'left') {
+        arrowPath = "M ".concat(arrowHeadEndingSize * 6 / 5, " 0\n        L ").concat(arrowHeadEndingSize * 4 / 5, " ").concat(arrowHeadEndingSize / 2, "\n        L ").concat(arrowHeadEndingSize * 6 / 5, " ").concat(arrowHeadEndingSize);
+    }
     return (_jsxs("svg", __assign({ width: canvasWidth, height: canvasHeight, style: {
             backgroundColor: "#eee",
             transform: "translate(".concat(canvasXOffset, "px, ").concat(canvasYOffset, "px)")
-        } }, { children: [_jsx("path", { stroke: "black", strokeWidth: strokeWidth, fill: "none", d: "\n        M ".concat(p1.x, " ").concat(p1.y, "\n        C ").concat(p2.x, " ").concat(p2.y, ",\n        ").concat(p3.x, " ").concat(p3.y, ",\n        ").concat(p4.x - STRAIGHT_LINE_BEFORE_ARROW_HEAD, " ").concat(p4.y, "\n        L ").concat(p4.x, " ").concat(p4.y) }), _jsx("path", { d: "\n  M ".concat((arrowHeadEndingSize / 5) * 2, " 0\n  L ").concat(arrowHeadEndingSize, " ").concat(arrowHeadEndingSize / 2, "\n  L ").concat((arrowHeadEndingSize / 5) * 2, " ").concat(arrowHeadEndingSize), fill: "none", stroke: "black", style: { transform: "translate(".concat(p4.x - arrowHeadEndingSize, "px, ").concat(p4.y - arrowHeadEndingSize / 2, "px)") } })] })));
+        } }, { children: [_jsx("path", { stroke: "black", strokeWidth: strokeWidth, fill: "none", d: "\n        M ".concat(p1.x, " ").concat(p1.y, "\n        C ").concat(p2.x, " ").concat(p2.y, ",\n        ").concat(p3.x, " ").concat(p3.y, ",\n        ").concat(p4.x - STRAIGHT_LINE_BEFORE_ARROW_HEAD, " ").concat(p4.y, "\n        L ").concat(p4.x, " ").concat(p4.y) }), _jsx("path", { d: arrowPath, fill: "none", stroke: "black", style: { transform: "translate(".concat(p4.x - arrowHeadEndingSize, "px, ").concat(p4.y - arrowHeadEndingSize / 2, "px)") } })] })));
 };
 function App() {
     var featureAPosition = {

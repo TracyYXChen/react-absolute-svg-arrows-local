@@ -105,7 +105,6 @@ export var Arrow = function (_a) {
     }
     //the axis is upward and rightward
     var k = (endPoint.y - startPoint.y) / (endPoint.x - startPoint.x);
-    console.log(k);
     if (k < -1 || k > 1) {
         if (endPoint.y > startPoint.y) {
             arrDir = 'down';
