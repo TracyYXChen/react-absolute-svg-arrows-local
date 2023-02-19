@@ -17,7 +17,7 @@ import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-run
 import styled from "styled-components";
 import { calculateDeltas, calculateCanvasDimensions, calculateControlPoints, } from "../utils/arrow-utils";
 var CONTROL_POINTS_RADIUS = 5;
-var STRAIGHT_LINE_BEFORE_ARROW_HEAD = 5;
+var STRAIGHT_LINE_BEFORE_ARROW_HEAD = 0;
 var Line = styled.svg.attrs(function (_a) {
     var $xTranslate = _a.$xTranslate, $yTranslate = _a.$yTranslate;
     return ({
@@ -55,7 +55,7 @@ export var Arrow = function (_a) {
     console.log(startPoint, endPoint);
     var defaultConfig = {
         //"#bcc4cc"
-        arrowColor: 'red',
+        arrowColor: "#bcc4cc",
         arrowHighlightedColor: "#4da6ff",
         controlPointsColor: "#ff4747",
         boundingBoxColor: "#ffcccc",
@@ -123,10 +123,10 @@ export var Arrow = function (_a) {
     }
     var arrowPath = '';
     if (arrDir === 'up') {
-        arrowPath = "M ".concat(0, "  ").concat(arrowHeadEndingSize, "\n      L ").concat(arrowHeadEndingSize * 4 / 5, " ").concat(arrowHeadEndingSize * 2 / 5, " \n      L ").concat(arrowHeadEndingSize * 8 / 5, " ").concat(arrowHeadEndingSize);
+        arrowPath = "M ".concat(0, "  ").concat(arrowHeadEndingSize, "\n      L ").concat(arrowHeadEndingSize * 5 / 5, " ").concat(arrowHeadEndingSize * 2 / 5, " \n      L ").concat(arrowHeadEndingSize * 8 / 5, " ").concat(arrowHeadEndingSize);
     }
     else if (arrDir === 'down') {
-        arrowPath = "M ".concat(0, "  ").concat(arrowHeadEndingSize * 2 / 5, "\n    L ").concat(arrowHeadEndingSize * 4 / 5, " ").concat(arrowHeadEndingSize * 3 / 5, " \n    L ").concat(arrowHeadEndingSize * 8 / 5, " ").concat(arrowHeadEndingSize * 2 / 5);
+        arrowPath = "M ".concat(0, "  ").concat(arrowHeadEndingSize * 2 / 5, "\n    L ").concat(arrowHeadEndingSize * 5 / 5, " ").concat(arrowHeadEndingSize * 3 / 5, " \n    L ").concat(arrowHeadEndingSize * 10 / 5, " ").concat(arrowHeadEndingSize * 2 / 5);
     }
     else if (arrDir === 'right') {
         arrowPath = "M ".concat((arrowHeadEndingSize / 5) * 4, " 0\n      L ").concat(arrowHeadEndingSize, " ").concat(arrowHeadEndingSize / 2, "\n      L ").concat((arrowHeadEndingSize / 5) * 4, " ").concat(arrowHeadEndingSize);

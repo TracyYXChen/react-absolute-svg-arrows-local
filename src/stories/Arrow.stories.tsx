@@ -19,8 +19,8 @@ export const HighlightedArrow = () => {
     y: 100,
   };
   const endPoint = {
-    x: 600,
-    y: 300,
+    x: 100,
+    y: 180,
   };
 
   // function handleMouseDown(e) {
@@ -54,7 +54,7 @@ export const InversedArrow = () => {
       endPoint={endPoint}
       isHighlighted={isHighlighted()}
       showDebugGuideLines={showDebugGuideLines()}
-      config={{arrowColor: 'red'}}
+      config={{arrowColor: 'black'}}
     />
   );
 };

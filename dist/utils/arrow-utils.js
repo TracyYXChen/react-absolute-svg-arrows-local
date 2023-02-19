@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 var MAX_Y_CONTROL_POINT_SHIFT = 0;
-var MAX_X_CONTROL_POINT_SHIFT = 10;
+var MAX_X_CONTROL_POINT_SHIFT = 0;
 // Y coordinates of our control points are moved in case of low delta Y to prevent lines overlapping.
 // Sign flips the curve depending on delta Y.
 // Movement is described according to following function: `y=a\left(0.9^{1.2^{\frac{x}{10}}}\right)`

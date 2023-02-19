@@ -14,7 +14,7 @@ import {
 import { Point } from "../types/Point";
 
 const CONTROL_POINTS_RADIUS = 5;
-const STRAIGHT_LINE_BEFORE_ARROW_HEAD = 5;
+const STRAIGHT_LINE_BEFORE_ARROW_HEAD = 0;
 
 type ArrowConfig = {
   arrowColor?: string;
@@ -164,7 +164,7 @@ export const Arrow = ({
   console.log(startPoint, endPoint);
   const defaultConfig = {
     //"#bcc4cc"
-    arrowColor: 'red',
+    arrowColor: "#bcc4cc",
     arrowHighlightedColor: "#4da6ff",
     controlPointsColor: "#ff4747",
     boundingBoxColor: "#ffcccc",
@@ -265,13 +265,13 @@ export const Arrow = ({
   let arrowPath = '';
   if(arrDir === 'up') {
     arrowPath = `M ${0}  ${arrowHeadEndingSize}
-      L ${arrowHeadEndingSize * 4 / 5 } ${arrowHeadEndingSize * 2 / 5} 
+      L ${arrowHeadEndingSize * 5 / 5 } ${arrowHeadEndingSize * 2 / 5} 
       L ${arrowHeadEndingSize * 8 / 5} ${arrowHeadEndingSize}`;
   }
   else if(arrDir === 'down') {
     arrowPath = `M ${0}  ${arrowHeadEndingSize * 2 / 5}
-    L ${arrowHeadEndingSize * 4 / 5 } ${arrowHeadEndingSize * 3 / 5} 
-    L ${arrowHeadEndingSize * 8 / 5} ${arrowHeadEndingSize * 2 / 5}`;
+    L ${arrowHeadEndingSize * 5 / 5 } ${arrowHeadEndingSize * 3 / 5} 
+    L ${arrowHeadEndingSize * 10 / 5} ${arrowHeadEndingSize * 2 / 5}`;
   }
   else if(arrDir === 'right') {
     arrowPath = `M ${(arrowHeadEndingSize / 5) * 4} 0

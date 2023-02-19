@@ -19,8 +19,8 @@ export var HighlightedArrow = function () {
         y: 100,
     };
     var endPoint = {
-        x: 600,
-        y: 300,
+        x: 100,
+        y: 180,
     };
     // function handleMouseDown(e) {
     //   console.log("mouse down");
@@ -36,7 +36,7 @@ export var InversedArrow = function () {
         x: 100,
         y: 100,
     };
-    return (_jsx(Arrow, { startPoint: startPoint, endPoint: endPoint, isHighlighted: isHighlighted(), showDebugGuideLines: showDebugGuideLines(), config: { arrowColor: 'red' } }));
+    return (_jsx(Arrow, { startPoint: startPoint, endPoint: endPoint, isHighlighted: isHighlighted(), showDebugGuideLines: showDebugGuideLines(), config: { arrowColor: 'black' } }));
 };
 export var ArrowInOneLine = function () {
     var startPoint1 = {
