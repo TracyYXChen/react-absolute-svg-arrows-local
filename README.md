@@ -3,7 +3,7 @@ locally modified version of https://github.com/productboardlabs/react-absolute-s
 ### transcompile to dist
 `tsc`
 
-(make sure `"noEmit":` in `tsconfig.json` is set to `True`)
+(make sure `"noEmit":` in `tsconfig.json` is set to `False`)
 
 
 ### run story book
