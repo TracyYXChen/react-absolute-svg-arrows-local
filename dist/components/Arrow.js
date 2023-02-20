@@ -106,7 +106,7 @@ export var Arrow = function (_a) {
     var markID = "arrowhead-".concat(startPoint.x, "-").concat(startPoint.y, "-").concat(endPoint.x, "-").concat(endPoint.y);
     var strokeColor = getStrokeColor();
     //console.log(markID);
-    return (_jsxs(_Fragment, { children: [_jsxs(CurvedLine, __assign({ width: canvasWidth, height: canvasHeight, "$isHighlighted": isHighlighted, "$showDebugGuideLines": showDebugGuideLines, "$boundingBoxColor": boundingBoxColor, "$xTranslate": canvasXOffset, "$yTranslate": canvasYOffset }, { children: [_jsx("defs", { children: _jsx("marker", __assign({ id: markID, markerWidth: "10", markerHeight: "7", refX: "0", refY: "3.5", orient: "auto" }, { children: _jsx("polygon", { points: "0 0, 10 3.5, 0 7", fill: arrowColor }) })) }), _jsx(RenderedLine, { d: curvedLinePath, 
+    return (_jsxs(_Fragment, { children: [_jsxs(CurvedLine, __assign({ width: canvasWidth, height: canvasHeight, "$isHighlighted": isHighlighted, "$showDebugGuideLines": showDebugGuideLines, "$boundingBoxColor": boundingBoxColor, "$xTranslate": canvasXOffset, "$yTranslate": canvasYOffset }, { children: [_jsx("defs", { children: _jsx("marker", __assign({ id: markID, markerWidth: "10", markerHeight: "7", refX: "9", refY: "3.5", orient: "auto" }, { children: _jsx("polygon", { points: "0 0, 10 3.5, 0 7", fill: arrowColor }) })) }), _jsx(RenderedLine, { d: curvedLinePath, 
                         //d={`M ${startPoint.x} ${startPoint.y} L ${endPoint.x} ${endPoint.y}`}
                         strokeWidth: strokeWidth, stroke: getStrokeColor(), fill: "yellow", markerEnd: "url(#".concat(markID, ")") }), _jsx(HoverableLine, __assign({ d: curvedLinePath, 
                         //d={`M ${startPoint.x} ${startPoint.y} L ${endPoint.x} ${endPoint.y}`}
