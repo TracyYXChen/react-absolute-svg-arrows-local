@@ -257,13 +257,13 @@ export const Arrow = ({
       >
         <defs>
         <marker id={markID} markerWidth="10" markerHeight="7" 
-          refX="0" refY="3.5" orient="auto">
+          refX="9" refY="3.5" orient="auto">
             <polygon points="0 0, 10 3.5, 0 7" fill={arrowColor}/>
         </marker>
         </defs> 
          
-        {/* <line x1={startPoint.x} y1={startPoint.y} x2={endPoint.x} y2={endPoint.y} stroke={getStrokeColor()} 
-        strokeWidth={strokeWidth} markerEnd={`url(#${markID})`} />  */}
+     
+
         <RenderedLine
           d={curvedLinePath}
           //d={`M ${startPoint.x} ${startPoint.y} L ${endPoint.x} ${endPoint.y}`}
@@ -288,6 +288,7 @@ export const Arrow = ({
         >
           {tooltip && <title>{tooltip}</title>}
         </HoverableLine>
+        {/* <line x1={p1.x + 20} y1={p1.y} x2={p4.x + 20} y2={p4.y} stroke='green' strokeWidth={strokeWidth} /> */}
         {/* <HoverableArrowHeadEnding
           d={arrowPath}
           fill="none"
