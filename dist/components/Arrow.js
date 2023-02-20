@@ -52,7 +52,7 @@ var ControlPoints = function (_a) {
 };
 export var Arrow = function (_a) {
     var startPoint = _a.startPoint, endPoint = _a.endPoint, _b = _a.isHighlighted, isHighlighted = _b === void 0 ? false : _b, _c = _a.showDebugGuideLines, showDebugGuideLines = _c === void 0 ? false : _c, onMouseEnter = _a.onMouseEnter, onMouseLeave = _a.onMouseLeave, onClick = _a.onClick, onMouseDown = _a.onMouseDown, config = _a.config, tooltip = _a.tooltip;
-    console.log(startPoint, endPoint);
+    //console.log(startPoint, endPoint);
     var defaultConfig = {
         //"#bcc4cc"
         arrowColor: "#bcc4cc",
@@ -87,56 +87,29 @@ export var Arrow = function (_a) {
     }), canvasWidth = _f.canvasWidth, canvasHeight = _f.canvasHeight;
     var canvasXOffset = Math.min(startPoint.x, endPoint.x) - boundingBoxBuffer.horizontal;
     var canvasYOffset = Math.min(startPoint.y, endPoint.y) - boundingBoxBuffer.vertical;
-    var curvedLinePath = "\n    M ".concat(p1.x, " ").concat(p1.y, "\n    C ").concat(p2.x, " ").concat(p2.y, ",\n    ").concat(p3.x, " ").concat(p3.y, ",\n    ").concat(p4.x - STRAIGHT_LINE_BEFORE_ARROW_HEAD, " ").concat(p4.y, "\n    L ").concat(p4.x, " ").concat(p4.y);
+    // const curvedLinePath = `
+    //   M ${p1.x} ${p1.y}
+    //   C ${p2.x} ${p2.y},
+    //   ${p3.x} ${p3.y},
+    //   ${p4.x - STRAIGHT_LINE_BEFORE_ARROW_HEAD} ${p4.y}
+    //   L ${p4.x} ${p4.y}`;
+    var curvedLinePath = "\n    M ".concat(p1.x, " ").concat(p1.y, "\n    L ").concat(p4.x, " ").concat(p4.y);
+    //console.log(curvedLinePath);
+    //console.log(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
     var getStrokeColor = function () {
         if (isHighlighted)
             return arrowHighlightedColor;
         return arrowColor;
     };
-    //pick an arrow direction
-    var arrDir = '';
-    if (startPoint.y === endPoint.y) {
-        if (startPoint.x < endPoint.x) {
-            arrDir = 'right';
-        }
-        else {
-            arrDir = 'left';
-        }
-    }
-    //the axis is upward and rightward
-    var k = (endPoint.y - startPoint.y) / (endPoint.x - startPoint.x);
-    if (k < -1 || k > 1) {
-        if (endPoint.y > startPoint.y) {
-            arrDir = 'down';
-        }
-        else {
-            arrDir = 'up';
-        }
-    }
-    else {
-        if (endPoint.x > startPoint.x) {
-            arrDir = 'right';
-        }
-        else {
-            arrDir = 'left';
-        }
-    }
-    var arrowPath = '';
-    if (arrDir === 'up') {
-        arrowPath = "M ".concat(0, "  ").concat(arrowHeadEndingSize, "\n      L ").concat(arrowHeadEndingSize * 5 / 5, " ").concat(arrowHeadEndingSize * 2 / 5, " \n      L ").concat(arrowHeadEndingSize * 8 / 5, " ").concat(arrowHeadEndingSize);
-    }
-    else if (arrDir === 'down') {
-        arrowPath = "M ".concat(0, "  ").concat(arrowHeadEndingSize * 2 / 5, "\n    L ").concat(arrowHeadEndingSize * 5 / 5, " ").concat(arrowHeadEndingSize * 3 / 5, " \n    L ").concat(arrowHeadEndingSize * 10 / 5, " ").concat(arrowHeadEndingSize * 2 / 5);
-    }
-    else if (arrDir === 'right') {
-        arrowPath = "M ".concat((arrowHeadEndingSize / 5) * 4, " 0\n      L ").concat(arrowHeadEndingSize, " ").concat(arrowHeadEndingSize / 2, "\n      L ").concat((arrowHeadEndingSize / 5) * 4, " ").concat(arrowHeadEndingSize);
-    }
-    else if (arrDir === 'left') {
-        arrowPath = "M ".concat(arrowHeadEndingSize * 6 / 5, " 0\n      L ").concat(arrowHeadEndingSize * 4 / 5, " ").concat(arrowHeadEndingSize / 2, "\n      L ").concat(arrowHeadEndingSize * 6 / 5, " ").concat(arrowHeadEndingSize);
-    }
-    console.log("p4", p4.x, p4.y);
-    console.log("end point", endPoint.x, endPoint.y);
+    //console.log("p4", p4.x, p4.y);
+    //console.log("end point", endPoint.x, endPoint.y);
+    var markID = "arrowhead-".concat(startPoint.x, "-").concat(startPoint.y, "-").concat(endPoint.x, "-").concat(endPoint.y);
     var strokeColor = getStrokeColor();
-    return (_jsxs(_Fragment, { children: [_jsxs(CurvedLine, __assign({ width: canvasWidth, height: canvasHeight, "$isHighlighted": isHighlighted, "$showDebugGuideLines": showDebugGuideLines, "$boundingBoxColor": boundingBoxColor, "$xTranslate": canvasXOffset, "$yTranslate": canvasYOffset }, { children: [_jsx(RenderedLine, { d: curvedLinePath, strokeWidth: strokeWidth, stroke: getStrokeColor(), fill: "none" }), _jsx(HoverableLine, __assign({ d: curvedLinePath, strokeWidth: hoverableLineWidth, stroke: "transparent", pointerEvents: "all", fill: "none", onMouseEnter: onMouseEnter, onMouseLeave: onMouseLeave, onClick: onClick, onMouseDown: onMouseDown }, { children: tooltip && _jsx("title", { children: tooltip }) })), _jsx(HoverableArrowHeadEnding, __assign({ d: arrowPath, fill: "none", stroke: "transparent", strokeWidth: hoverableLineWidth, strokeLinecap: "round", pointerEvents: "all", "$xTranslate": p4.x - arrowHeadOffset * 2, "$yTranslate": p4.y - arrowHeadOffset, onMouseEnter: onMouseEnter, onMouseLeave: onMouseLeave, onClick: onClick, onMouseDown: onMouseDown }, { children: tooltip && _jsx("title", { children: tooltip }) })), _jsx(HoverableDotEnding, __assign({ cx: p1.x, cy: p1.y, r: dotEndingRadius, stroke: "transparent", strokeWidth: hoverableLineWidth, fill: "transparent" }, { children: tooltip && _jsx("title", { children: tooltip }) }))] })), _jsxs(Endings, __assign({ width: canvasWidth, height: canvasHeight, "$isHighlighted": isHighlighted, "$xTranslate": canvasXOffset, "$yTranslate": canvasYOffset }, { children: [_jsx(DotEnding, { cx: p1.x, cy: p1.y, r: dotEndingRadius, stroke: strokeColor, strokeWidth: strokeWidth, fill: dotEndingBackground }), _jsx(ArrowHeadEnding, { d: arrowPath, fill: "none", stroke: strokeColor, strokeWidth: strokeWidth, strokeLinecap: "round", "$xTranslate": p4.x - arrowHeadOffset * 2, "$yTranslate": p4.y - arrowHeadOffset }), showDebugGuideLines && (_jsx(ControlPoints, { p1: p1, p2: p2, p3: p3, p4: p4, color: controlPointsColor }))] }))] }));
+    //console.log(markID);
+    return (_jsxs(_Fragment, { children: [_jsxs(CurvedLine, __assign({ width: canvasWidth, height: canvasHeight, "$isHighlighted": isHighlighted, "$showDebugGuideLines": showDebugGuideLines, "$boundingBoxColor": boundingBoxColor, "$xTranslate": canvasXOffset, "$yTranslate": canvasYOffset }, { children: [_jsx("defs", { children: _jsx("marker", __assign({ id: markID, markerWidth: "10", markerHeight: "7", refX: "0", refY: "3.5", orient: "auto" }, { children: _jsx("polygon", { points: "0 0, 10 3.5, 0 7", fill: arrowColor }) })) }), _jsx(RenderedLine, { d: curvedLinePath, 
+                        //d={`M ${startPoint.x} ${startPoint.y} L ${endPoint.x} ${endPoint.y}`}
+                        strokeWidth: strokeWidth, stroke: getStrokeColor(), fill: "yellow", markerEnd: "url(#".concat(markID, ")") }), _jsx(HoverableLine, __assign({ d: curvedLinePath, 
+                        //d={`M ${startPoint.x} ${startPoint.y} L ${endPoint.x} ${endPoint.y}`}
+                        strokeWidth: hoverableLineWidth, stroke: "transparent", pointerEvents: "all", fill: "green", onMouseEnter: onMouseEnter, onMouseLeave: onMouseLeave, onClick: onClick, onMouseDown: onMouseDown }, { children: tooltip && _jsx("title", { children: tooltip }) })), _jsx(HoverableDotEnding, __assign({ cx: p1.x, cy: p1.y, r: dotEndingRadius, stroke: "transparent", strokeWidth: hoverableLineWidth, fill: "transparent" }, { children: tooltip && _jsx("title", { children: tooltip }) }))] })), _jsxs(Endings, __assign({ width: canvasWidth, height: canvasHeight, "$isHighlighted": isHighlighted, "$xTranslate": canvasXOffset, "$yTranslate": canvasYOffset }, { children: [_jsx(DotEnding, { cx: p1.x, cy: p1.y, r: dotEndingRadius, stroke: strokeColor, strokeWidth: strokeWidth, fill: dotEndingBackground }), showDebugGuideLines && (_jsx(ControlPoints, { p1: p1, p2: p2, p3: p3, p4: p4, color: controlPointsColor }))] }))] }));
 };
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9;
