@@ -161,7 +161,7 @@ export const Arrow = ({
   config,
   tooltip,
 }: Props) => {
-  console.log(startPoint, endPoint);
+  //console.log(startPoint, endPoint);
   const defaultConfig = {
     //"#bcc4cc"
     arrowColor: "#bcc4cc",
@@ -218,75 +218,31 @@ export const Arrow = ({
   const canvasYOffset =
     Math.min(startPoint.y, endPoint.y) - boundingBoxBuffer.vertical;
 
+  // const curvedLinePath = `
+  //   M ${p1.x} ${p1.y}
+  //   C ${p2.x} ${p2.y},
+  //   ${p3.x} ${p3.y},
+  //   ${p4.x - STRAIGHT_LINE_BEFORE_ARROW_HEAD} ${p4.y}
+  //   L ${p4.x} ${p4.y}`;
+  
   const curvedLinePath = `
     M ${p1.x} ${p1.y}
-    C ${p2.x} ${p2.y},
-    ${p3.x} ${p3.y},
-    ${p4.x - STRAIGHT_LINE_BEFORE_ARROW_HEAD} ${p4.y}
     L ${p4.x} ${p4.y}`;
 
+
+  //console.log(curvedLinePath);
+  //console.log(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
   const getStrokeColor = () => {
     if (isHighlighted) return arrowHighlightedColor;
 
     return arrowColor;
   };
 
-  //pick an arrow direction
-
-  let arrDir = '';
-  if (startPoint.y === endPoint.y) {
-      if (startPoint.x < endPoint.x) {
-          arrDir = 'right';
-      }
-      else {
-          arrDir = 'left';
-      }
-  }
-
-  //the axis is upward and rightward
-  let k = (endPoint.y - startPoint.y) / (endPoint.x - startPoint.x);
-  if (k < -1 || k > 1) {
-    if (endPoint.y > startPoint.y) {
-      arrDir = 'down'
-    }
-    else {
-      arrDir = 'up'
-    }
-  }
-  else {
-    if (endPoint.x > startPoint.x) {
-      arrDir = 'right'
-    }
-    else {
-      arrDir = 'left'
-    }
-  }
-  
-  let arrowPath = '';
-  if(arrDir === 'up') {
-    arrowPath = `M ${0}  ${arrowHeadEndingSize}
-      L ${arrowHeadEndingSize * 5 / 5 } ${arrowHeadEndingSize * 2 / 5} 
-      L ${arrowHeadEndingSize * 8 / 5} ${arrowHeadEndingSize}`;
-  }
-  else if(arrDir === 'down') {
-    arrowPath = `M ${0}  ${arrowHeadEndingSize * 2 / 5}
-    L ${arrowHeadEndingSize * 5 / 5 } ${arrowHeadEndingSize * 3 / 5} 
-    L ${arrowHeadEndingSize * 10 / 5} ${arrowHeadEndingSize * 2 / 5}`;
-  }
-  else if(arrDir === 'right') {
-    arrowPath = `M ${(arrowHeadEndingSize / 5) * 4} 0
-      L ${arrowHeadEndingSize} ${arrowHeadEndingSize / 2}
-      L ${(arrowHeadEndingSize / 5) * 4} ${arrowHeadEndingSize}`;
-  }
-  else if(arrDir === 'left') {
-    arrowPath = `M ${arrowHeadEndingSize * 6 / 5 } 0
-      L ${arrowHeadEndingSize * 4 / 5} ${arrowHeadEndingSize / 2}
-      L ${arrowHeadEndingSize * 6 / 5 } ${arrowHeadEndingSize}`;
-  }
-  console.log("p4", p4.x, p4.y);
-  console.log("end point", endPoint.x, endPoint.y);
-
+  //console.log("p4", p4.x, p4.y);
+  //console.log("end point", endPoint.x, endPoint.y);
+  const markID = `arrowhead-${startPoint.x}-${startPoint.y}-${endPoint.x}-${endPoint.y}`;
   const strokeColor = getStrokeColor();
+  //console.log(markID);
 
   return (
     <>
@@ -299,18 +255,32 @@ export const Arrow = ({
         $xTranslate={canvasXOffset}
         $yTranslate={canvasYOffset}
       >
+        <defs>
+        <marker id={markID} markerWidth="10" markerHeight="7" 
+          refX="0" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill={arrowColor}/>
+        </marker>
+        </defs> 
+         
+        {/* <line x1={startPoint.x} y1={startPoint.y} x2={endPoint.x} y2={endPoint.y} stroke={getStrokeColor()} 
+        strokeWidth={strokeWidth} markerEnd={`url(#${markID})`} />  */}
         <RenderedLine
           d={curvedLinePath}
+          //d={`M ${startPoint.x} ${startPoint.y} L ${endPoint.x} ${endPoint.y}`}
           strokeWidth={strokeWidth}
           stroke={getStrokeColor()}
-          fill="none"
-        />
+          fill="yellow"
+          markerEnd={`url(#${markID})`}
+        /> 
+      
+       
         <HoverableLine
           d={curvedLinePath}
+          //d={`M ${startPoint.x} ${startPoint.y} L ${endPoint.x} ${endPoint.y}`}
           strokeWidth={hoverableLineWidth}
           stroke="transparent"
           pointerEvents="all"
-          fill="none"
+          fill="green"
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           onClick={onClick}
@@ -318,7 +288,7 @@ export const Arrow = ({
         >
           {tooltip && <title>{tooltip}</title>}
         </HoverableLine>
-        <HoverableArrowHeadEnding
+        {/* <HoverableArrowHeadEnding
           d={arrowPath}
           fill="none"
           stroke="transparent"
@@ -333,7 +303,7 @@ export const Arrow = ({
           onMouseDown={onMouseDown}
         >
           {tooltip && <title>{tooltip}</title>}
-        </HoverableArrowHeadEnding>
+        </HoverableArrowHeadEnding> */}
         <HoverableDotEnding
           cx={p1.x}
           cy={p1.y}
@@ -345,6 +315,7 @@ export const Arrow = ({
           {tooltip && <title>{tooltip}</title>}
         </HoverableDotEnding>
       </CurvedLine>
+
       <Endings
         width={canvasWidth}
         height={canvasHeight}
@@ -360,7 +331,7 @@ export const Arrow = ({
           strokeWidth={strokeWidth}
           fill={dotEndingBackground}
         />
-        <ArrowHeadEnding
+        {/* <ArrowHeadEnding
           d={arrowPath}
           fill="none"
           stroke={strokeColor}
@@ -370,7 +341,11 @@ export const Arrow = ({
           //$yTranslate={p4.y - arrowHeadOffset}
           $xTranslate={p4.x - arrowHeadOffset * 2}
           $yTranslate={p4.y - arrowHeadOffset}
-        />
+        /> */}
+        
+        {/* <line x1={startPoint.x} y1={startPoint.y} x2={endPoint.x} y2={endPoint.y} stroke="black" 
+        strokeWidth={strokeWidth} markerEnd={`url(#${markID})`} />  */}
+        
         {showDebugGuideLines && (
           <ControlPoints
             p1={p1}
