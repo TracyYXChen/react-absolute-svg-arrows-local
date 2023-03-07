@@ -260,9 +260,13 @@ export const Arrow = ({
         $yTranslate={canvasYOffset}
       >
         <defs>
-          <marker id={markID} markerWidth="10" markerHeight="7" 
+          {/* <marker id={markID} markerWidth="10" markerHeight="7" 
             refX="9" refY="3.5" orient="auto">
               <polygon points="0 0, 10 3.5, 0 7" fill={arrowColor}/>
+          </marker> */}
+
+          <marker id={markID} markerWidth="6" markerHeight="8" refX="5" refY="4" orient="auto">
+               <polygon points="0 0, 6 4, 0 8" fill={arrowColor}></polygon>
           </marker>
         </defs> 
          
