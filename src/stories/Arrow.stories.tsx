@@ -19,8 +19,8 @@ export const HighlightedArrow = () => {
     y: 100,
   };
   const endPoint = {
-    x: 100,
-    y: 180,
+    x: 200,
+    y: 200,
   };
 
   // function handleMouseDown(e) {
@@ -41,11 +41,11 @@ export const HighlightedArrow = () => {
 export const InversedArrow = () => {
   const startPoint = {
     x: 600,
-    y: 300,
+    y: 100,
   };
   const endPoint = {
     x: 100,
-    y: 100,
+    y: 500,
   };
 
   return (
@@ -84,7 +84,7 @@ export const ArrowInOneLine = () => {
   };
   const endPoint3 = {
     x: 600,
-    y: 300,
+    y: 600,
   };
 
   return (

@@ -93,9 +93,12 @@ export var Arrow = function (_a) {
     //   ${p3.x} ${p3.y},
     //   ${p4.x - STRAIGHT_LINE_BEFORE_ARROW_HEAD} ${p4.y}
     //   L ${p4.x} ${p4.y}`;
-    var curvedLinePath = "\n    M ".concat(p1.x, " ").concat(p1.y, "\n    L ").concat(p4.x, " ").concat(p4.y);
-    //console.log(curvedLinePath);
-    //console.log(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+    // const curvedLinePath = `
+    //   M ${p1.x} ${p1.y}
+    //   L ${p4.x} ${p4.y}`;
+    // const curvedLinePath = `
+    // M ${p1.x} ${p1.y} C ${p4.x} ${p1.y} ${p1.x} ${p4.y} ${p4.x} ${p4.y}`;
+    var curvedLinePath = "\n  M ".concat(p1.x, " ").concat(p1.y, " C ").concat(p1.x, " ").concat(p4.y, " ").concat(p4.x, " ").concat(p1.y, " ").concat(p4.x, " ").concat(p4.y);
     var getStrokeColor = function () {
         if (isHighlighted)
             return arrowHighlightedColor;
@@ -108,8 +111,8 @@ export var Arrow = function (_a) {
     //console.log(markID);
     return (_jsxs(_Fragment, { children: [_jsxs(CurvedLine, __assign({ width: canvasWidth, height: canvasHeight, "$isHighlighted": isHighlighted, "$showDebugGuideLines": showDebugGuideLines, "$boundingBoxColor": boundingBoxColor, "$xTranslate": canvasXOffset, "$yTranslate": canvasYOffset }, { children: [_jsx("defs", { children: _jsx("marker", __assign({ id: markID, markerWidth: "10", markerHeight: "7", refX: "9", refY: "3.5", orient: "auto" }, { children: _jsx("polygon", { points: "0 0, 10 3.5, 0 7", fill: arrowColor }) })) }), _jsx(RenderedLine, { d: curvedLinePath, 
                         //d={`M ${startPoint.x} ${startPoint.y} L ${endPoint.x} ${endPoint.y}`}
-                        strokeWidth: strokeWidth, stroke: getStrokeColor(), fill: "yellow", markerEnd: "url(#".concat(markID, ")") }), _jsx(HoverableLine, __assign({ d: curvedLinePath, 
+                        strokeWidth: strokeWidth, stroke: getStrokeColor(), fill: "none", markerEnd: "url(#".concat(markID, ")") }), _jsx(HoverableLine, __assign({ d: curvedLinePath, 
                         //d={`M ${startPoint.x} ${startPoint.y} L ${endPoint.x} ${endPoint.y}`}
-                        strokeWidth: hoverableLineWidth, stroke: "transparent", pointerEvents: "all", fill: "green", onMouseEnter: onMouseEnter, onMouseLeave: onMouseLeave, onClick: onClick, onMouseDown: onMouseDown }, { children: tooltip && _jsx("title", { children: tooltip }) })), _jsx(HoverableDotEnding, __assign({ cx: p1.x, cy: p1.y, r: dotEndingRadius, stroke: "transparent", strokeWidth: hoverableLineWidth, fill: "transparent" }, { children: tooltip && _jsx("title", { children: tooltip }) }))] })), _jsxs(Endings, __assign({ width: canvasWidth, height: canvasHeight, "$isHighlighted": isHighlighted, "$xTranslate": canvasXOffset, "$yTranslate": canvasYOffset }, { children: [_jsx(DotEnding, { cx: p1.x, cy: p1.y, r: dotEndingRadius, stroke: strokeColor, strokeWidth: strokeWidth, fill: dotEndingBackground }), showDebugGuideLines && (_jsx(ControlPoints, { p1: p1, p2: p2, p3: p3, p4: p4, color: controlPointsColor }))] }))] }));
+                        strokeWidth: hoverableLineWidth, stroke: "transparent", pointerEvents: "all", fill: "none", onMouseEnter: onMouseEnter, onMouseLeave: onMouseLeave, onClick: onClick, onMouseDown: onMouseDown }, { children: tooltip && _jsx("title", { children: tooltip }) })), _jsx(HoverableDotEnding, __assign({ cx: p1.x, cy: p1.y, r: dotEndingRadius, stroke: "transparent", strokeWidth: hoverableLineWidth, fill: "transparent" }, { children: tooltip && _jsx("title", { children: tooltip }) }))] })), _jsxs(Endings, __assign({ width: canvasWidth, height: canvasHeight, "$isHighlighted": isHighlighted, "$xTranslate": canvasXOffset, "$yTranslate": canvasYOffset }, { children: [_jsx(DotEnding, { cx: p1.x, cy: p1.y, r: dotEndingRadius, stroke: strokeColor, strokeWidth: strokeWidth, fill: dotEndingBackground }), showDebugGuideLines && (_jsx(ControlPoints, { p1: p1, p2: p2, p3: p3, p4: p4, color: controlPointsColor }))] }))] }));
 };
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6, templateObject_7, templateObject_8, templateObject_9;

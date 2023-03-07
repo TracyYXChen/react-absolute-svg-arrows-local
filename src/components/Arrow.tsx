@@ -225,13 +225,17 @@ export const Arrow = ({
   //   ${p4.x - STRAIGHT_LINE_BEFORE_ARROW_HEAD} ${p4.y}
   //   L ${p4.x} ${p4.y}`;
   
+  // const curvedLinePath = `
+  //   M ${p1.x} ${p1.y}
+  //   L ${p4.x} ${p4.y}`;
+
+  // const curvedLinePath = `
+  // M ${p1.x} ${p1.y} C ${p4.x} ${p1.y} ${p1.x} ${p4.y} ${p4.x} ${p4.y}`;
+
   const curvedLinePath = `
-    M ${p1.x} ${p1.y}
-    L ${p4.x} ${p4.y}`;
+  M ${p1.x} ${p1.y} C ${p1.x} ${p4.y} ${p4.x} ${p1.y} ${p4.x} ${p4.y}`;
 
-
-  //console.log(curvedLinePath);
-  //console.log(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+  
   const getStrokeColor = () => {
     if (isHighlighted) return arrowHighlightedColor;
 
@@ -256,10 +260,10 @@ export const Arrow = ({
         $yTranslate={canvasYOffset}
       >
         <defs>
-        <marker id={markID} markerWidth="10" markerHeight="7" 
-          refX="9" refY="3.5" orient="auto">
-            <polygon points="0 0, 10 3.5, 0 7" fill={arrowColor}/>
-        </marker>
+          <marker id={markID} markerWidth="10" markerHeight="7" 
+            refX="9" refY="3.5" orient="auto">
+              <polygon points="0 0, 10 3.5, 0 7" fill={arrowColor}/>
+          </marker>
         </defs> 
          
      
@@ -269,7 +273,7 @@ export const Arrow = ({
           //d={`M ${startPoint.x} ${startPoint.y} L ${endPoint.x} ${endPoint.y}`}
           strokeWidth={strokeWidth}
           stroke={getStrokeColor()}
-          fill="yellow"
+          fill="none"
           markerEnd={`url(#${markID})`}
         /> 
       
@@ -280,7 +284,7 @@ export const Arrow = ({
           strokeWidth={hoverableLineWidth}
           stroke="transparent"
           pointerEvents="all"
-          fill="green"
+          fill="none"
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           onClick={onClick}
