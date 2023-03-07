@@ -20,7 +20,7 @@ export const HighlightedArrow = () => {
   };
   const endPoint = {
     x: 200,
-    y: 200,
+    y: 120,
   };
 
   // function handleMouseDown(e) {

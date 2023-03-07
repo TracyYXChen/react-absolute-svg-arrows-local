@@ -20,7 +20,7 @@ export var HighlightedArrow = function () {
     };
     var endPoint = {
         x: 200,
-        y: 200,
+        y: 120,
     };
     // function handleMouseDown(e) {
     //   console.log("mouse down");

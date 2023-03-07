@@ -99,7 +99,7 @@ export var Arrow = function (_a) {
     // const curvedLinePath = `
     // M ${p1.x} ${p1.y} C ${p4.x} ${p1.y} ${p1.x} ${p4.y} ${p4.x} ${p4.y}`;
     var arrowHeight = 8;
-    var curvedLinePath = "\n  M ".concat(p1.x, " ").concat(p1.y, " C ").concat(p1.x, " ").concat(p4.y - arrowHeight, " ").concat(p4.x, " ").concat(p1.y, " ").concat(p4.x, " ").concat(p4.y - arrowHeight);
+    var curvedLinePath = "\n  M ".concat(p1.x, " ").concat(p1.y, " C ").concat(p1.x, " ").concat(p4.y, " ").concat(p4.x, " ").concat(p1.y, " ").concat(p4.x, " ").concat(p4.y + arrowHeight);
     var getStrokeColor = function () {
         if (isHighlighted)
             return arrowHighlightedColor;
