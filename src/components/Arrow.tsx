@@ -231,9 +231,9 @@ export const Arrow = ({
 
   // const curvedLinePath = `
   // M ${p1.x} ${p1.y} C ${p4.x} ${p1.y} ${p1.x} ${p4.y} ${p4.x} ${p4.y}`;
-
+  const arrowHeight = 8;
   const curvedLinePath = `
-  M ${p1.x} ${p1.y} C ${p1.x} ${p4.y} ${p4.x} ${p1.y} ${p4.x} ${p4.y}`;
+  M ${p1.x} ${p1.y} C ${p1.x} ${p4.y - arrowHeight} ${p4.x} ${p1.y} ${p4.x} ${p4.y - arrowHeight}`;
 
   
   const getStrokeColor = () => {
