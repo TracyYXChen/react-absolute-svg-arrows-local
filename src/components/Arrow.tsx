@@ -231,9 +231,9 @@ export const Arrow = ({
 
   // const curvedLinePath = `
   // M ${p1.x} ${p1.y} C ${p4.x} ${p1.y} ${p1.x} ${p4.y} ${p4.x} ${p4.y}`;
-  const arrowHeight = 8;
+  
   const curvedLinePath = `
-  M ${p1.x} ${p1.y} C ${p1.x} ${p4.y} ${p4.x} ${p1.y} ${p4.x} ${p4.y + arrowHeight}`;
+  M ${p1.x} ${p1.y} C ${p1.x} ${p4.y} ${p4.x} ${p1.y} ${p4.x} ${p4.y}`;
 
   
   const getStrokeColor = () => {
@@ -244,6 +244,7 @@ export const Arrow = ({
 
   //console.log("p4", p4.x, p4.y);
   //console.log("end point", endPoint.x, endPoint.y);
+  
   const markID = `arrowhead-${startPoint.x}-${startPoint.y}-${endPoint.x}-${endPoint.y}`;
   const strokeColor = getStrokeColor();
   //console.log(markID);
@@ -265,7 +266,7 @@ export const Arrow = ({
               <polygon points="0 0, 10 3.5, 0 7" fill={arrowColor}/>
           </marker> */}
 
-          <marker id={markID} markerWidth="6" markerHeight="8" refX="5" refY="4" orient="auto">
+          <marker id={markID} markerWidth="6" markerHeight="8" refX="0" refY="4" orient="auto">
                <polygon points="0 0, 6 4, 0 8" fill={arrowColor}></polygon>
           </marker>
         </defs> 
