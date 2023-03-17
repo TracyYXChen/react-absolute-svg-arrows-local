@@ -19,8 +19,16 @@ export const HighlightedArrow = () => {
     y: 100,
   };
   const endPoint = {
-    x: 200,
-    y: 120,
+    x: 150,
+    y: 150,
+  };
+  const control1 = {
+    x: 90,
+    y: 120
+  };
+  const control2 = {
+    x: 150,
+    y: 150
   };
 
   // function handleMouseDown(e) {
@@ -31,6 +39,8 @@ export const HighlightedArrow = () => {
     <Arrow
       startPoint={startPoint}
       endPoint={endPoint}
+      controlPoint1={control1}
+      controlPoint2={control2}
       isHighlighted={isHighlighted(true)}
       showDebugGuideLines={showDebugGuideLines()}
       config={{arrowColor: 'red'}}

@@ -211,17 +211,23 @@ export const Arrow = ({
     absDy,
   });
 
-  //overwrite
-  p1 = startPoint;
-  p2 = startPoint;
-  p3 = endPoint;
-  p4 = endPoint;
+  //overwrite will lead to incorrect svg bound
+  //p1 = startPoint;
+  let xOff = startPoint.x - p1.x;
+  let yOff = startPoint.y - p1.y;
+  p2 = {x: p1.x, y: p1.y};
+  p3 = {x: p4.x, y: p4.y};
+  
   if(controlPoint1) {
-    p2 = controlPoint1;
+    p2.x = controlPoint1.x - xOff;
+    p2.y = controlPoint1.y - yOff;
   }
   if(controlPoint2) {
-    p3 = controlPoint2;
+    p3.x = controlPoint2.x - xOff;
+    p3.y = controlPoint2.y - yOff;
   }
+  console.log(xOff, yOff);
+  console.log(p1, p2, p3, p4);
  
 
   const { canvasWidth, canvasHeight } = calculateCanvasDimensions({
@@ -234,35 +240,25 @@ export const Arrow = ({
     Math.min(startPoint.x, endPoint.x) - boundingBoxBuffer.horizontal;
   const canvasYOffset =
     Math.min(startPoint.y, endPoint.y) - boundingBoxBuffer.vertical;
-
-  // const curvedLinePath = `
-  //   M ${p1.x} ${p1.y}
-  //   C ${p2.x} ${p2.y},
-  //   ${p3.x} ${p3.y},
-  //   ${p4.x - STRAIGHT_LINE_BEFORE_ARROW_HEAD} ${p4.y}
-  //   L ${p4.x} ${p4.y}`;
-  
-  // const curvedLinePath = `
-  //   M ${p1.x} ${p1.y}
-  //   L ${p4.x} ${p4.y}`;
-
+  console.log(canvasXOffset, canvasYOffset);
   // const curvedLinePath = `
   // M ${p1.x} ${p1.y} C ${p4.x} ${p1.y} ${p1.x} ${p4.y} ${p4.x} ${p4.y}`;
   //console.log(controlPoint1);
   //console.log(controlPoint2);
   let curvedLinePath;
   if(controlPoint1 && controlPoint2) {
-    if (p1.x === controlPoint1.x && p1.y === controlPoint1.y) {
+    console.log(controlPoint1, controlPoint2);
+    if (startPoint.x === controlPoint1.x && startPoint.y === controlPoint1.y) {
       //use controlpoint2 as end
-      curvedLinePath = `M ${p1.x} ${p1.y} C ${p1.x} ${controlPoint2.y} ${controlPoint2.x} ${p1.y} ${controlPoint2.x} ${controlPoint2.y} L ${p4.x} ${p4.y}`;
+      curvedLinePath = `M ${p1.x} ${p1.y} C ${p1.x} ${p3.y} ${p3.x} ${p1.y} ${p3.x} ${p3.y} L ${p4.x} ${p4.y}`;
     }
     else {
       //use controlpoint1 as end
-      curvedLinePath = `M ${p1.x} ${p1.y} C ${p1.x} ${controlPoint1.y} ${controlPoint1.x} ${p1.y} ${controlPoint1.x} ${controlPoint1.y} L ${p4.x} ${p4.y}`;
+      curvedLinePath = `M ${p1.x} ${p1.y} C ${p1.x} ${p2.y} ${p2.x} ${p1.y} ${p2.x} ${p2.y} L ${p4.x} ${p4.y}`;
     }
   }
   else {
-    curvedLinePath = `M ${p1.x} ${p1.y} C ${p4.x} ${p1.y} ${p1.x} ${p4.y} ${p4.x} ${p4.y}`;
+    curvedLinePath = `M ${p1.x} ${p1.y} C ${p1.x} ${p4.y} ${p4.x} ${p1.y} ${p4.x} ${p4.y}`;
   }
   //console.log(curvedLinePath);
 
