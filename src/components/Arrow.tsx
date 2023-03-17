@@ -226,8 +226,8 @@ export const Arrow = ({
     p3.x = controlPoint2.x - xOff;
     p3.y = controlPoint2.y - yOff;
   }
-  console.log(xOff, yOff);
-  console.log(p1, p2, p3, p4);
+  //console.log(xOff, yOff);
+  //console.log(p1, p2, p3, p4);
  
 
   const { canvasWidth, canvasHeight } = calculateCanvasDimensions({
@@ -240,14 +240,14 @@ export const Arrow = ({
     Math.min(startPoint.x, endPoint.x) - boundingBoxBuffer.horizontal;
   const canvasYOffset =
     Math.min(startPoint.y, endPoint.y) - boundingBoxBuffer.vertical;
-  console.log(canvasXOffset, canvasYOffset);
+  //console.log(canvasXOffset, canvasYOffset);
   // const curvedLinePath = `
   // M ${p1.x} ${p1.y} C ${p4.x} ${p1.y} ${p1.x} ${p4.y} ${p4.x} ${p4.y}`;
   //console.log(controlPoint1);
   //console.log(controlPoint2);
   let curvedLinePath;
   if(controlPoint1 && controlPoint2) {
-    console.log(controlPoint1, controlPoint2);
+    //console.log(controlPoint1, controlPoint2);
     if (startPoint.x === controlPoint1.x && startPoint.y === controlPoint1.y) {
       //use controlpoint2 as end
       curvedLinePath = `M ${p1.x} ${p1.y} C ${p1.x} ${p3.y} ${p3.x} ${p1.y} ${p3.x} ${p3.y} L ${p4.x} ${p4.y}`;

@@ -19,13 +19,21 @@ export var HighlightedArrow = function () {
         y: 100,
     };
     var endPoint = {
-        x: 200,
-        y: 120,
+        x: 150,
+        y: 150,
+    };
+    var control1 = {
+        x: 90,
+        y: 120
+    };
+    var control2 = {
+        x: 150,
+        y: 150
     };
     // function handleMouseDown(e) {
     //   console.log("mouse down");
     // }
-    return (_jsx(Arrow, { startPoint: startPoint, endPoint: endPoint, isHighlighted: isHighlighted(true), showDebugGuideLines: showDebugGuideLines(), config: { arrowColor: 'red' } }));
+    return (_jsx(Arrow, { startPoint: startPoint, endPoint: endPoint, controlPoint1: control1, controlPoint2: control2, isHighlighted: isHighlighted(true), showDebugGuideLines: showDebugGuideLines(), config: { arrowColor: 'red' } }));
 };
 export var InversedArrow = function () {
     var startPoint = {
