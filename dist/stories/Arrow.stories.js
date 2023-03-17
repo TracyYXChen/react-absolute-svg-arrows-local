@@ -29,14 +29,22 @@ export var HighlightedArrow = function () {
 };
 export var InversedArrow = function () {
     var startPoint = {
-        x: 600,
-        y: 100,
+        x: 10,
+        y: 10,
+    };
+    var control1 = {
+        x: 10,
+        y: 10
+    };
+    var control2 = {
+        x: 100,
+        y: 30
     };
     var endPoint = {
         x: 100,
-        y: 500,
+        y: 100,
     };
-    return (_jsx(Arrow, { startPoint: startPoint, endPoint: endPoint, isHighlighted: isHighlighted(), showDebugGuideLines: showDebugGuideLines(), config: { arrowColor: 'black' } }));
+    return (_jsx(Arrow, { startPoint: startPoint, endPoint: endPoint, controlPoint1: control1, controlPoint2: control2, isHighlighted: isHighlighted(), showDebugGuideLines: showDebugGuideLines(), config: { arrowColor: 'black' } }));
 };
 export var ArrowInOneLine = function () {
     var startPoint1 = {

@@ -30,6 +30,8 @@ type ArrowConfig = {
 
 type Props = {
   startPoint: Point;
+  controlPoint1?: Point;
+  controlPoint2?:Point;
   endPoint: Point;
   isHighlighted?: boolean;
   showDebugGuideLines?: boolean;
@@ -152,6 +154,8 @@ const ControlPoints = ({
 export const Arrow = ({
   startPoint,
   endPoint,
+  controlPoint1,
+  controlPoint2,
   isHighlighted = false,
   showDebugGuideLines = false,
   onMouseEnter,
@@ -199,13 +203,26 @@ export const Arrow = ({
     CONTROL_POINTS_RADIUS / 2;
 
   const { absDx, absDy, dx, dy } = calculateDeltas(startPoint, endPoint);
-  const { p1, p2, p3, p4, boundingBoxBuffer } = calculateControlPoints({
+  let { p1, p2, p3, p4, boundingBoxBuffer } = calculateControlPoints({
     boundingBoxElementsBuffer,
     dx,
     dy,
     absDx,
     absDy,
   });
+
+  //overwrite
+  p1 = startPoint;
+  p2 = startPoint;
+  p3 = endPoint;
+  p4 = endPoint;
+  if(controlPoint1) {
+    p2 = controlPoint1;
+  }
+  if(controlPoint2) {
+    p3 = controlPoint2;
+  }
+ 
 
   const { canvasWidth, canvasHeight } = calculateCanvasDimensions({
     absDx,
@@ -231,9 +248,23 @@ export const Arrow = ({
 
   // const curvedLinePath = `
   // M ${p1.x} ${p1.y} C ${p4.x} ${p1.y} ${p1.x} ${p4.y} ${p4.x} ${p4.y}`;
-  
-  const curvedLinePath = `
-  M ${p1.x} ${p1.y} C ${p1.x} ${p4.y} ${p4.x} ${p1.y} ${p4.x} ${p4.y}`;
+  //console.log(controlPoint1);
+  //console.log(controlPoint2);
+  let curvedLinePath;
+  if(controlPoint1 && controlPoint2) {
+    if (p1.x === controlPoint1.x && p1.y === controlPoint1.y) {
+      //use controlpoint2 as end
+      curvedLinePath = `M ${p1.x} ${p1.y} C ${p1.x} ${controlPoint2.y} ${controlPoint2.x} ${p1.y} ${controlPoint2.x} ${controlPoint2.y} L ${p4.x} ${p4.y}`;
+    }
+    else {
+      //use controlpoint1 as end
+      curvedLinePath = `M ${p1.x} ${p1.y} C ${p1.x} ${controlPoint1.y} ${controlPoint1.x} ${p1.y} ${controlPoint1.x} ${controlPoint1.y} L ${p4.x} ${p4.y}`;
+    }
+  }
+  else {
+    curvedLinePath = `M ${p1.x} ${p1.y} C ${p4.x} ${p1.y} ${p1.x} ${p4.y} ${p4.x} ${p4.y}`;
+  }
+  //console.log(curvedLinePath);
 
   
   const getStrokeColor = () => {
@@ -247,7 +278,6 @@ export const Arrow = ({
   
   const markID = `arrowhead-${startPoint.x}-${startPoint.y}-${endPoint.x}-${endPoint.y}`;
   const strokeColor = getStrokeColor();
-  //console.log(markID);
 
   return (
     <>

@@ -17,6 +17,8 @@ type ArrowConfig = {
 };
 type Props = {
     startPoint: Point;
+    controlPoint1?: Point;
+    controlPoint2?: Point;
     endPoint: Point;
     isHighlighted?: boolean;
     showDebugGuideLines?: boolean;
@@ -27,5 +29,5 @@ type Props = {
     config?: ArrowConfig;
     tooltip?: string;
 };
-export declare const Arrow: ({ startPoint, endPoint, isHighlighted, showDebugGuideLines, onMouseEnter, onMouseLeave, onClick, onMouseDown, config, tooltip, }: Props) => JSX.Element;
+export declare const Arrow: ({ startPoint, endPoint, controlPoint1, controlPoint2, isHighlighted, showDebugGuideLines, onMouseEnter, onMouseLeave, onClick, onMouseDown, config, tooltip, }: Props) => JSX.Element;
 export {};
