@@ -29,10 +29,9 @@ type ArrowConfig = {
 };
 
 type Props = {
-  startPoint: Point;
-  controlPoint1?: Point;
-  controlPoint2?:Point;
-  endPoint: Point;
+  //startPoint: Point;
+  allPoints: Array<Point>;
+  //endPoint: Point;
   isHighlighted?: boolean;
   showDebugGuideLines?: boolean;
   onMouseEnter?: (e: React.MouseEvent) => void;
@@ -152,10 +151,7 @@ const ControlPoints = ({
 };
 
 export const Arrow = ({
-  startPoint,
-  endPoint,
-  controlPoint1,
-  controlPoint2,
+  allPoints,
   isHighlighted = false,
   showDebugGuideLines = false,
   onMouseEnter,
@@ -165,9 +161,7 @@ export const Arrow = ({
   config,
   tooltip,
 }: Props) => {
-  //console.log(startPoint, endPoint);
   const defaultConfig = {
-    //"#bcc4cc"
     arrowColor: "#bcc4cc",
     arrowHighlightedColor: "#4da6ff",
     controlPointsColor: "#ff4747",
@@ -201,7 +195,8 @@ export const Arrow = ({
     arrowHeadEndingSize / 2 +
     dotEndingRadius +
     CONTROL_POINTS_RADIUS / 2;
-
+  const startPoint = allPoints[0];
+  const endPoint = allPoints[allPoints.length - 1];
   const { absDx, absDy, dx, dy } = calculateDeltas(startPoint, endPoint);
   let { p1, p2, p3, p4, boundingBoxBuffer } = calculateControlPoints({
     boundingBoxElementsBuffer,
@@ -218,16 +213,13 @@ export const Arrow = ({
   p2 = {x: p1.x, y: p1.y};
   p3 = {x: p4.x, y: p4.y};
   
-  if(controlPoint1) {
-    p2.x = controlPoint1.x - xOff;
-    p2.y = controlPoint1.y - yOff;
+  let transformedPoints = [];
+  for(let pt of allPoints) {
+    transformedPoints.push({
+      x: pt.x - xOff,
+      y: pt.y - yOff
+    });
   }
-  if(controlPoint2) {
-    p3.x = controlPoint2.x - xOff;
-    p3.y = controlPoint2.y - yOff;
-  }
-  //console.log(xOff, yOff);
-  //console.log(p1, p2, p3, p4);
  
 
   const { canvasWidth, canvasHeight } = calculateCanvasDimensions({
@@ -243,34 +235,29 @@ export const Arrow = ({
   //console.log(canvasXOffset, canvasYOffset);
   // const curvedLinePath = `
   // M ${p1.x} ${p1.y} C ${p4.x} ${p1.y} ${p1.x} ${p4.y} ${p4.x} ${p4.y}`;
-  //console.log(controlPoint1);
-  //console.log(controlPoint2);
   let curvedLinePath;
-  if(controlPoint1 && controlPoint2) {
-    //console.log(controlPoint1, controlPoint2);
-    if (startPoint.x === controlPoint1.x && startPoint.y === controlPoint1.y) {
-      //use controlpoint2 as end
-      curvedLinePath = `M ${p1.x} ${p1.y} C ${p1.x} ${p3.y} ${p3.x} ${p1.y} ${p3.x} ${p3.y} L ${p4.x} ${p4.y}`;
+  const getBezierPath = (ptArr: Array<Point>) => {
+    let ptStr = '';
+    const n = ptArr.length;
+    let p1 = ptArr[0];
+    let p2;
+    for(let i=1;i<n-1;i++) {
+      p2 = ptArr[i];
+      ptStr += `M ${p1.x} ${p1.y} C ${p1.x} ${p2.y} ${p2.x} ${p1.y} ${p2.x} ${p2.y} `;
+      p1 = p2;
     }
-    else {
-      //use controlpoint1 as end
-      curvedLinePath = `M ${p1.x} ${p1.y} C ${p1.x} ${p2.y} ${p2.x} ${p1.y} ${p2.x} ${p2.y} L ${p4.x} ${p4.y}`;
-    }
+    let pN = ptArr[n-1];
+    //ptStr += `L ${pN[0]} ${pN[1]}`;
+    ptStr += `M ${p1.x} ${p1.y} C ${p1.x} ${pN.y} ${pN.x} ${p1.y} ${pN.x} ${pN.y} `;
+    return ptStr;
   }
-  else {
-    curvedLinePath = `M ${p1.x} ${p1.y} C ${p1.x} ${p4.y} ${p4.x} ${p1.y} ${p4.x} ${p4.y}`;
-  }
-  //console.log(curvedLinePath);
-
+  curvedLinePath = getBezierPath(allPoints);
   
   const getStrokeColor = () => {
     if (isHighlighted) return arrowHighlightedColor;
 
     return arrowColor;
   };
-
-  //console.log("p4", p4.x, p4.y);
-  //console.log("end point", endPoint.x, endPoint.y);
   
   const markID = `arrowhead-${startPoint.x}-${startPoint.y}-${endPoint.x}-${endPoint.y}`;
   const strokeColor = getStrokeColor();
@@ -287,12 +274,7 @@ export const Arrow = ({
         $yTranslate={canvasYOffset}
       >
         <defs>
-          {/* <marker id={markID} markerWidth="10" markerHeight="7" 
-            refX="9" refY="3.5" orient="auto">
-              <polygon points="0 0, 10 3.5, 0 7" fill={arrowColor}/>
-          </marker> */}
-
-          <marker id={markID} markerWidth="6" markerHeight="8" refX="0" refY="4" orient="auto">
+          <marker id={markID} markerWidth="6" markerHeight="8" refX="0" refY="4" orient="90">
                <polygon points="0 0, 6 4, 0 8" fill={arrowColor}></polygon>
           </marker>
         </defs> 
