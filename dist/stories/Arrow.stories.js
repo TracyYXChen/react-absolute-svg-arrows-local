@@ -13,83 +13,35 @@ var showDebugGuideLines = function (defaultValue) {
     if (defaultValue === void 0) { defaultValue = false; }
     return boolean("Show debug guide lines", defaultValue);
 };
+var ar2ptAr = function (arr) {
+    var allPoints = [];
+    for (var _i = 0, arr_1 = arr; _i < arr_1.length; _i++) {
+        var ar = arr_1[_i];
+        allPoints.push({
+            x: ar[0],
+            y: ar[1]
+        });
+    }
+    return allPoints;
+};
 export var HighlightedArrow = function () {
-    var startPoint = {
-        x: 100,
-        y: 100,
-    };
-    var endPoint = {
-        x: 150,
-        y: 150,
-    };
-    var control1 = {
-        x: 90,
-        y: 120
-    };
-    var control2 = {
-        x: 150,
-        y: 150
-    };
-    // function handleMouseDown(e) {
-    //   console.log("mouse down");
-    // }
-    return (_jsx(Arrow, { startPoint: startPoint, endPoint: endPoint, controlPoint1: control1, controlPoint2: control2, isHighlighted: isHighlighted(true), showDebugGuideLines: showDebugGuideLines(), config: { arrowColor: 'red' } }));
+    var Arr = [[82, 10], [82, 10], [58, 18], [58, 47], [34, 55], [34, 55]];
+    var allPoints = ar2ptAr(Arr);
+    return (_jsx(Arrow, { allPoints: allPoints, isHighlighted: isHighlighted(true), showDebugGuideLines: showDebugGuideLines(), config: { arrowColor: 'red' } }));
 };
 export var InversedArrow = function () {
-    var startPoint = {
-        x: 10,
-        y: 10,
-    };
-    var control1 = {
-        x: 10,
-        y: 10
-    };
-    var control2 = {
-        x: 100,
-        y: 30
-    };
-    var endPoint = {
-        x: 100,
-        y: 100,
-    };
-    return (_jsx(Arrow, { startPoint: startPoint, endPoint: endPoint, controlPoint1: control1, controlPoint2: control2, isHighlighted: isHighlighted(), showDebugGuideLines: showDebugGuideLines(), config: { arrowColor: 'black' } }));
+    var Arr = [[10, 10], [10, 10], [100, 30], [100, 100]];
+    var allPoints = ar2ptAr(Arr);
+    return (_jsx(Arrow, { allPoints: allPoints, isHighlighted: isHighlighted(), showDebugGuideLines: showDebugGuideLines(), config: { arrowColor: 'black' } }));
 };
 export var ArrowInOneLine = function () {
-    var startPoint1 = {
-        x: 600,
-        y: 100,
-    };
-    var endPoint1 = {
-        x: 600,
-        y: 420,
-    };
-    var startPoint2 = {
-        x: 400,
-        y: 200,
-    };
-    var endPoint2 = {
-        x: 400,
-        y: 100,
-    };
-    var startPoint3 = {
-        x: 100,
-        y: 300,
-    };
-    var endPoint3 = {
-        x: 600,
-        y: 600,
-    };
-    return (_jsxs(_Fragment, { children: [_jsx(Arrow, { startPoint: startPoint1, endPoint: endPoint1, isHighlighted: isHighlighted(), showDebugGuideLines: showDebugGuideLines() }), _jsx(Arrow, { startPoint: startPoint2, endPoint: endPoint2, isHighlighted: isHighlighted(), showDebugGuideLines: showDebugGuideLines() }), _jsx(Arrow, { startPoint: startPoint3, endPoint: endPoint3, isHighlighted: isHighlighted(), showDebugGuideLines: showDebugGuideLines() })] }));
+    var Arr = [[10, 10], [10, 10], [100, 30], [100, 100]];
+    var allPoints = ar2ptAr(Arr);
+    return (_jsxs(_Fragment, { children: [_jsx(Arrow, { allPoints: allPoints, isHighlighted: isHighlighted(), showDebugGuideLines: showDebugGuideLines() }), _jsx(Arrow, { allPoints: allPoints, isHighlighted: isHighlighted(), showDebugGuideLines: showDebugGuideLines() }), _jsx(Arrow, { allPoints: allPoints, isHighlighted: isHighlighted(), showDebugGuideLines: showDebugGuideLines() })] }));
 };
 export var ArrowWithCustomConfig = function () {
-    var startPoint = {
-        x: 100,
-        y: 100,
-    };
-    var endPoint = {
-        x: 600,
-        y: 300,
-    };
+    var Arr = [[10, 10], [10, 10], [100, 30], [100, 100]];
+    var allPoints = ar2ptAr(Arr);
     var config = {
         arrowColor: "red",
         arrowHighlightedColor: "black",
@@ -98,18 +50,12 @@ export var ArrowWithCustomConfig = function () {
         arrowHeadEndingSize: 15,
         strokeWidth: 2,
     };
-    return (_jsx(Arrow, { startPoint: startPoint, endPoint: endPoint, isHighlighted: isHighlighted(), showDebugGuideLines: showDebugGuideLines(), config: config }));
+    return (_jsx(Arrow, { allPoints: allPoints, isHighlighted: isHighlighted(), showDebugGuideLines: showDebugGuideLines(), config: config }));
 };
 export var ArrowWithVisibleControlPointsAndBoundingBox = function () {
-    var startPoint = {
-        x: 600,
-        y: 200,
-    };
-    var endPoint = {
-        x: 400,
-        y: 100,
-    };
-    return (_jsx(Arrow, { startPoint: startPoint, endPoint: endPoint, isHighlighted: isHighlighted(), showDebugGuideLines: showDebugGuideLines(true) }));
+    var Arr = [[600, 200], [400, 100]];
+    var allPoints = ar2ptAr(Arr);
+    return (_jsx(Arrow, { allPoints: allPoints, isHighlighted: isHighlighted(), showDebugGuideLines: showDebugGuideLines(true) }));
 };
 export var Playground = function () {
     var options = {
@@ -137,7 +83,8 @@ export var Playground = function () {
         hoverableLineWidth: 10,
         strokeWidth: 1,
     });
-    return (_jsx(Arrow, { startPoint: startPoint, endPoint: endPoint, isHighlighted: isHighlighted(), showDebugGuideLines: showDebugGuideLines(), config: config }));
+    var allPoints = [startPoint, endPoint];
+    return (_jsx(Arrow, { allPoints: allPoints, isHighlighted: isHighlighted(), showDebugGuideLines: showDebugGuideLines(), config: config }));
 };
 export default {
     title: "Arrow",
