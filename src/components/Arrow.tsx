@@ -206,20 +206,10 @@ export const Arrow = ({
     absDy,
   });
 
-  //overwrite will lead to incorrect svg bound
-  //p1 = startPoint;
-  let xOff = startPoint.x - p1.x;
-  let yOff = startPoint.y - p1.y;
-  p2 = {x: p1.x, y: p1.y};
-  p3 = {x: p4.x, y: p4.y};
   
-  let transformedPoints = [];
-  for(let pt of allPoints) {
-    transformedPoints.push({
-      x: pt.x - xOff,
-      y: pt.y - yOff
-    });
-  }
+ 
+  
+
  
 
   const { canvasWidth, canvasHeight } = calculateCanvasDimensions({
@@ -239,19 +229,31 @@ export const Arrow = ({
   const getBezierPath = (ptArr: Array<Point>) => {
     let ptStr = '';
     const n = ptArr.length;
-    let p1 = ptArr[0];
-    let p2;
+    let pA = ptArr[0];
+    let pB;
     for(let i=1;i<n-1;i++) {
-      p2 = ptArr[i];
-      ptStr += `M ${p1.x} ${p1.y} C ${p1.x} ${p2.y} ${p2.x} ${p1.y} ${p2.x} ${p2.y} `;
-      p1 = p2;
+      pB = ptArr[i];
+      ptStr += `M ${pA.x} ${pA.y} C ${pA.x} ${pB.y} ${pB.x} ${pA.y} ${pB.x} ${pB.y} `;
+      pA = pB;
     }
     let pN = ptArr[n-1];
     //ptStr += `L ${pN[0]} ${pN[1]}`;
-    ptStr += `M ${p1.x} ${p1.y} C ${p1.x} ${pN.y} ${pN.x} ${p1.y} ${pN.x} ${pN.y} `;
+    ptStr += `M ${pA.x} ${pA.y} C ${pA.x} ${pN.y} ${pN.x} ${pA.y} ${pN.x} ${pN.y} `;
     return ptStr;
   }
-  curvedLinePath = getBezierPath(allPoints);
+
+
+  let xOff = startPoint.x - p1.x;
+  let yOff = startPoint.y - p1.y;
+  let transformedPoints = [];
+  for(let pt of allPoints) {
+    transformedPoints.push({
+      x: pt.x - xOff,
+      y: pt.y - yOff
+    });
+  }
+
+  curvedLinePath = getBezierPath(transformedPoints);
   
   const getStrokeColor = () => {
     if (isHighlighted) return arrowHighlightedColor;

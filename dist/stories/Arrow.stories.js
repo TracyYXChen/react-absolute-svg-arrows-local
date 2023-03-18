@@ -25,7 +25,8 @@ var ar2ptAr = function (arr) {
     return allPoints;
 };
 export var HighlightedArrow = function () {
-    var Arr = [[82, 10], [82, 10], [58, 18], [58, 47], [34, 55], [34, 55]];
+    //const Arr = [[82, 10], [82, 10], [58, 18], [58, 47], [34, 55], [34, 55]];
+    var Arr = [[200, 600], [200, 600], [400, 700], [400, 700]];
     var allPoints = ar2ptAr(Arr);
     return (_jsx(Arrow, { allPoints: allPoints, isHighlighted: isHighlighted(true), showDebugGuideLines: showDebugGuideLines(), config: { arrowColor: 'red' } }));
 };

@@ -80,20 +80,6 @@ export var Arrow = function (_a) {
         absDx: absDx,
         absDy: absDy,
     }), p1 = _e.p1, p2 = _e.p2, p3 = _e.p3, p4 = _e.p4, boundingBoxBuffer = _e.boundingBoxBuffer;
-    //overwrite will lead to incorrect svg bound
-    //p1 = startPoint;
-    var xOff = startPoint.x - p1.x;
-    var yOff = startPoint.y - p1.y;
-    p2 = { x: p1.x, y: p1.y };
-    p3 = { x: p4.x, y: p4.y };
-    var transformedPoints = [];
-    for (var _i = 0, allPoints_1 = allPoints; _i < allPoints_1.length; _i++) {
-        var pt = allPoints_1[_i];
-        transformedPoints.push({
-            x: pt.x - xOff,
-            y: pt.y - yOff
-        });
-    }
     var _f = calculateCanvasDimensions({
         absDx: absDx,
         absDy: absDy,
@@ -108,19 +94,29 @@ export var Arrow = function (_a) {
     var getBezierPath = function (ptArr) {
         var ptStr = '';
         var n = ptArr.length;
-        var p1 = ptArr[0];
-        var p2;
+        var pA = ptArr[0];
+        var pB;
         for (var i = 1; i < n - 1; i++) {
-            p2 = ptArr[i];
-            ptStr += "M ".concat(p1.x, " ").concat(p1.y, " C ").concat(p1.x, " ").concat(p2.y, " ").concat(p2.x, " ").concat(p1.y, " ").concat(p2.x, " ").concat(p2.y, " ");
-            p1 = p2;
+            pB = ptArr[i];
+            ptStr += "M ".concat(pA.x, " ").concat(pA.y, " C ").concat(pA.x, " ").concat(pB.y, " ").concat(pB.x, " ").concat(pA.y, " ").concat(pB.x, " ").concat(pB.y, " ");
+            pA = pB;
         }
         var pN = ptArr[n - 1];
         //ptStr += `L ${pN[0]} ${pN[1]}`;
-        ptStr += "M ".concat(p1.x, " ").concat(p1.y, " C ").concat(p1.x, " ").concat(pN.y, " ").concat(pN.x, " ").concat(p1.y, " ").concat(pN.x, " ").concat(pN.y, " ");
+        ptStr += "M ".concat(pA.x, " ").concat(pA.y, " C ").concat(pA.x, " ").concat(pN.y, " ").concat(pN.x, " ").concat(pA.y, " ").concat(pN.x, " ").concat(pN.y, " ");
         return ptStr;
     };
-    curvedLinePath = getBezierPath(allPoints);
+    var xOff = startPoint.x - p1.x;
+    var yOff = startPoint.y - p1.y;
+    var transformedPoints = [];
+    for (var _i = 0, allPoints_1 = allPoints; _i < allPoints_1.length; _i++) {
+        var pt = allPoints_1[_i];
+        transformedPoints.push({
+            x: pt.x - xOff,
+            y: pt.y - yOff
+        });
+    }
+    curvedLinePath = getBezierPath(transformedPoints);
     var getStrokeColor = function () {
         if (isHighlighted)
             return arrowHighlightedColor;
