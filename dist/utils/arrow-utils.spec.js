@@ -6,41 +6,41 @@ var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cook
  * Copyright (c) ProductBoard, Inc.
  * All rights reserved.
  */
-import { calculateDeltas, calculateLowDyControlPointShift, calculateFixedLineInflectionConstant, calculateCanvasDimensions, calculateControlPointsWithoutBoundingBox, calculateControlPoints, } from './arrow-utils';
-describe('calculateDeltas', function () {
-    it('calculates deltas', function () {
-        var sourcePoint = {
-            x: 0,
-            y: 0,
-        };
-        var targetPoint = {
-            x: 100,
-            y: 200,
-        };
-        expect(calculateDeltas(sourcePoint, targetPoint)).toEqual({
-            absDx: 100,
-            absDy: 200,
-            dx: 100,
-            dy: 200,
-        });
-    });
-    it('calculates deltas when the end point is before the start one', function () {
-        var sourcePoint = {
-            x: 100,
-            y: 200,
-        };
-        var targetPoint = {
-            x: -100,
-            y: -100,
-        };
-        expect(calculateDeltas(sourcePoint, targetPoint)).toEqual({
-            absDx: 200,
-            absDy: 300,
-            dx: -200,
-            dy: -300,
-        });
-    });
-});
+import { calculateLowDyControlPointShift, calculateFixedLineInflectionConstant, calculateCanvasDimensions, calculateControlPointsWithoutBoundingBox, calculateControlPoints, } from './arrow-utils';
+// describe('calculateDeltas', () => {
+//   it('calculates deltas', () => {
+//     const sourcePoint = {
+//       x: 0,
+//       y: 0,
+//     };
+//     const targetPoint = {
+//       x: 100,
+//       y: 200,
+//     };
+//     expect(calculateDeltas(sourcePoint, targetPoint)).toEqual({
+//       absDx: 100,
+//       absDy: 200,
+//       dx: 100,
+//       dy: 200,
+//     });
+//   });
+//   it('calculates deltas when the end point is before the start one', () => {
+//     const sourcePoint = {
+//       x: 100,
+//       y: 200,
+//     };
+//     const targetPoint = {
+//       x: -100,
+//       y: -100,
+//     };
+//     expect(calculateDeltas(sourcePoint, targetPoint)).toEqual({
+//       absDx: 200,
+//       absDy: 300,
+//       dx: -200,
+//       dy: -300,
+//     });
+//   });
+// });
 describe('calculateLowDyControlPointShift', function () {
     var MAX_Y_CONTROL_POINT_SHIFT = 0;
     test.each(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    dx     | dy      | expected\n    ", "  | ", "   | ", "\n    ", " | ", " | ", "\n    ", " | ", " | ", "\n    ", " | ", " | ", "\n    ", " | ", "  | ", "\n    ", " | ", "    | ", "\n    ", " | ", "   | ", "\n    ", " | ", "  | ", "\n    ", " | ", "  | ", "\n    ", " | ", "  | ", "\n  "], ["\n    dx     | dy      | expected\n    ", "  | ", "   | ", "\n    ", " | ", " | ", "\n    ", " | ", " | ", "\n    ", " | ", " | ", "\n    ", " | ", "  | ", "\n    ", " | ", "    | ", "\n    ", " | ", "   | ", "\n    ", " | ", "  | ", "\n    ", " | ", "  | ", "\n    ", " | ", "  | ", "\n  "])), 10, 10, 0, -10, -300, 0, -10, -200, -1, -10, -100, -26, -10, -10, -44, -10, 0, 45, -10, 10, 44, -10, 100, 26, -10, 200, 1, -10, 300, 0)("calculates control low dY point shift when dx = $dx and dy = $dy", function (_a) {

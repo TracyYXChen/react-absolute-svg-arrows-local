@@ -41,9 +41,9 @@ export var calculateLowDyControlPointShift = function (dx, dy, maxShift) {
         return 0;
     return sign * value;
 };
-export var calculateDeltas = function (startPoint, endPoint) {
-    var dx = endPoint.x - startPoint.x;
-    var dy = endPoint.y - startPoint.y;
+export var calculateDeltas = function (pointsArray) {
+    var dx = Math.max.apply(Math, pointsArray.map(function (obj) { return obj.x; })) - Math.min.apply(Math, pointsArray.map(function (obj) { return obj.x; }));
+    var dy = Math.max.apply(Math, pointsArray.map(function (obj) { return obj.y; })) - Math.min.apply(Math, pointsArray.map(function (obj) { return obj.y; }));
     var absDx = Math.abs(dx);
     var absDy = Math.abs(dy);
     return { dx: dx, dy: dy, absDx: absDx, absDy: absDy };

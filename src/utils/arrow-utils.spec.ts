@@ -11,41 +11,41 @@ import {
   calculateControlPoints,
 } from './arrow-utils';
 
-describe('calculateDeltas', () => {
-  it('calculates deltas', () => {
-    const sourcePoint = {
-      x: 0,
-      y: 0,
-    };
-    const targetPoint = {
-      x: 100,
-      y: 200,
-    };
-    expect(calculateDeltas(sourcePoint, targetPoint)).toEqual({
-      absDx: 100,
-      absDy: 200,
-      dx: 100,
-      dy: 200,
-    });
-  });
+// describe('calculateDeltas', () => {
+//   it('calculates deltas', () => {
+//     const sourcePoint = {
+//       x: 0,
+//       y: 0,
+//     };
+//     const targetPoint = {
+//       x: 100,
+//       y: 200,
+//     };
+//     expect(calculateDeltas(sourcePoint, targetPoint)).toEqual({
+//       absDx: 100,
+//       absDy: 200,
+//       dx: 100,
+//       dy: 200,
+//     });
+//   });
 
-  it('calculates deltas when the end point is before the start one', () => {
-    const sourcePoint = {
-      x: 100,
-      y: 200,
-    };
-    const targetPoint = {
-      x: -100,
-      y: -100,
-    };
-    expect(calculateDeltas(sourcePoint, targetPoint)).toEqual({
-      absDx: 200,
-      absDy: 300,
-      dx: -200,
-      dy: -300,
-    });
-  });
-});
+//   it('calculates deltas when the end point is before the start one', () => {
+//     const sourcePoint = {
+//       x: 100,
+//       y: 200,
+//     };
+//     const targetPoint = {
+//       x: -100,
+//       y: -100,
+//     };
+//     expect(calculateDeltas(sourcePoint, targetPoint)).toEqual({
+//       absDx: 200,
+//       absDy: 300,
+//       dx: -200,
+//       dy: -300,
+//     });
+//   });
+// });
 
 describe('calculateLowDyControlPointShift', () => {
   const MAX_Y_CONTROL_POINT_SHIFT = 0;

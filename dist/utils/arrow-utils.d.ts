@@ -4,7 +4,7 @@
  */
 import { Point } from "../types/Point";
 export declare const calculateLowDyControlPointShift: (dx: number, dy: number, maxShift?: number) => number;
-export declare const calculateDeltas: (startPoint: Point, endPoint: Point) => {
+export declare const calculateDeltas: (pointsArray: Array<Point>) => {
     dx: number;
     dy: number;
     absDx: number;

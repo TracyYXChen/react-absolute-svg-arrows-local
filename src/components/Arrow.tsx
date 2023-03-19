@@ -197,7 +197,7 @@ export const Arrow = ({
     CONTROL_POINTS_RADIUS / 2;
   const startPoint = allPoints[0];
   const endPoint = allPoints[allPoints.length - 1];
-  const { absDx, absDy, dx, dy } = calculateDeltas(startPoint, endPoint);
+  const { absDx, absDy, dx, dy } = calculateDeltas(allPoints);
   let { p1, p2, p3, p4, boundingBoxBuffer } = calculateControlPoints({
     boundingBoxElementsBuffer,
     dx,
@@ -226,6 +226,8 @@ export const Arrow = ({
   // const curvedLinePath = `
   // M ${p1.x} ${p1.y} C ${p4.x} ${p1.y} ${p1.x} ${p4.y} ${p4.x} ${p4.y}`;
   let curvedLinePath;
+  let arrowHeadHeight = 8;
+  let arrowOffset = arrowHeadHeight + strokeWidth;
   const getBezierPath = (ptArr: Array<Point>) => {
     let ptStr = '';
     const n = ptArr.length;
@@ -238,7 +240,7 @@ export const Arrow = ({
     }
     let pN = ptArr[n-1];
     //ptStr += `L ${pN[0]} ${pN[1]}`;
-    ptStr += `M ${pA.x} ${pA.y} C ${pA.x} ${pN.y} ${pN.x} ${pA.y} ${pN.x} ${pN.y} `;
+    ptStr += `M ${pA.x} ${pA.y} C ${pA.x} ${pN.y} ${pN.x} ${pA.y} ${pN.x} ${pN.y - arrowOffset} `;
     return ptStr;
   }
 
@@ -276,7 +278,7 @@ export const Arrow = ({
         $yTranslate={canvasYOffset}
       >
         <defs>
-          <marker id={markID} markerWidth="6" markerHeight="8" refX="0" refY="4" orient="90">
+          <marker id={markID} markerWidth="6" markerHeight="8" refX="0" refY="4" orient="auto">
                <polygon points="0 0, 6 4, 0 8" fill={arrowColor}></polygon>
           </marker>
         </defs> 

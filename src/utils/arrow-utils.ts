@@ -52,16 +52,15 @@ export const calculateLowDyControlPointShift = (
 };
 
 export const calculateDeltas = (
-  startPoint: Point,
-  endPoint: Point
+  pointsArray: Array<Point>
 ): {
   dx: number;
   dy: number;
   absDx: number;
   absDy: number;
 } => {
-  const dx = endPoint.x - startPoint.x;
-  const dy = endPoint.y - startPoint.y;
+  const dx = Math.max(...pointsArray.map(obj => obj.x)) - Math.min(...pointsArray.map(obj => obj.x));
+  const dy = Math.max(...pointsArray.map(obj => obj.y)) - Math.min(...pointsArray.map(obj => obj.y));
   const absDx = Math.abs(dx);
   const absDy = Math.abs(dy);
 

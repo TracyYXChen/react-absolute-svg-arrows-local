@@ -26,7 +26,7 @@ const ar2ptAr = (arr: Array<Array<number>>) => {
 
 export const HighlightedArrow = () => {
   //const Arr = [[82, 10], [82, 10], [58, 18], [58, 47], [34, 55], [34, 55]];
-  const Arr = [[200, 600], [200, 600], [400, 700], [400, 700]];
+  const Arr = [[200, 600], [200, 600], [500, 800], [400, 700]];
   let allPoints = ar2ptAr(Arr);
   return (
     <Arrow

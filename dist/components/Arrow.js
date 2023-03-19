@@ -72,7 +72,7 @@ export var Arrow = function (_a) {
         CONTROL_POINTS_RADIUS / 2;
     var startPoint = allPoints[0];
     var endPoint = allPoints[allPoints.length - 1];
-    var _d = calculateDeltas(startPoint, endPoint), absDx = _d.absDx, absDy = _d.absDy, dx = _d.dx, dy = _d.dy;
+    var _d = calculateDeltas(allPoints), absDx = _d.absDx, absDy = _d.absDy, dx = _d.dx, dy = _d.dy;
     var _e = calculateControlPoints({
         boundingBoxElementsBuffer: boundingBoxElementsBuffer,
         dx: dx,
@@ -91,6 +91,8 @@ export var Arrow = function (_a) {
     // const curvedLinePath = `
     // M ${p1.x} ${p1.y} C ${p4.x} ${p1.y} ${p1.x} ${p4.y} ${p4.x} ${p4.y}`;
     var curvedLinePath;
+    var arrowHeadHeight = 8;
+    var arrowOffset = arrowHeadHeight + strokeWidth;
     var getBezierPath = function (ptArr) {
         var ptStr = '';
         var n = ptArr.length;
@@ -103,7 +105,7 @@ export var Arrow = function (_a) {
         }
         var pN = ptArr[n - 1];
         //ptStr += `L ${pN[0]} ${pN[1]}`;
-        ptStr += "M ".concat(pA.x, " ").concat(pA.y, " C ").concat(pA.x, " ").concat(pN.y, " ").concat(pN.x, " ").concat(pA.y, " ").concat(pN.x, " ").concat(pN.y, " ");
+        ptStr += "M ".concat(pA.x, " ").concat(pA.y, " C ").concat(pA.x, " ").concat(pN.y, " ").concat(pN.x, " ").concat(pA.y, " ").concat(pN.x, " ").concat(pN.y - arrowOffset, " ");
         return ptStr;
     };
     var xOff = startPoint.x - p1.x;
@@ -124,7 +126,7 @@ export var Arrow = function (_a) {
     };
     var markID = "arrowhead-".concat(startPoint.x, "-").concat(startPoint.y, "-").concat(endPoint.x, "-").concat(endPoint.y);
     var strokeColor = getStrokeColor();
-    return (_jsxs(_Fragment, { children: [_jsxs(CurvedLine, __assign({ width: canvasWidth, height: canvasHeight, "$isHighlighted": isHighlighted, "$showDebugGuideLines": showDebugGuideLines, "$boundingBoxColor": boundingBoxColor, "$xTranslate": canvasXOffset, "$yTranslate": canvasYOffset }, { children: [_jsx("defs", { children: _jsx("marker", __assign({ id: markID, markerWidth: "6", markerHeight: "8", refX: "0", refY: "4", orient: "90" }, { children: _jsx("polygon", { points: "0 0, 6 4, 0 8", fill: arrowColor }) })) }), _jsx(RenderedLine, { d: curvedLinePath, 
+    return (_jsxs(_Fragment, { children: [_jsxs(CurvedLine, __assign({ width: canvasWidth, height: canvasHeight, "$isHighlighted": isHighlighted, "$showDebugGuideLines": showDebugGuideLines, "$boundingBoxColor": boundingBoxColor, "$xTranslate": canvasXOffset, "$yTranslate": canvasYOffset }, { children: [_jsx("defs", { children: _jsx("marker", __assign({ id: markID, markerWidth: "6", markerHeight: "8", refX: "0", refY: "4", orient: "auto" }, { children: _jsx("polygon", { points: "0 0, 6 4, 0 8", fill: arrowColor }) })) }), _jsx(RenderedLine, { d: curvedLinePath, 
                         //d={`M ${startPoint.x} ${startPoint.y} L ${endPoint.x} ${endPoint.y}`}
                         strokeWidth: strokeWidth, stroke: getStrokeColor(), fill: "none", markerEnd: "url(#".concat(markID, ")") }), _jsx(HoverableLine, __assign({ d: curvedLinePath, 
                         //d={`M ${startPoint.x} ${startPoint.y} L ${endPoint.x} ${endPoint.y}`}
