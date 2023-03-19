@@ -26,7 +26,8 @@ const ar2ptAr = (arr: Array<Array<number>>) => {
 
 export const HighlightedArrow = () => {
   //const Arr = [[82, 10], [82, 10], [58, 18], [58, 47], [34, 55], [34, 55]];
-  const Arr = [[200, 600], [200, 600], [500, 800], [400, 700]];
+  //const Arr = [[200, 600], [200, 600], [500, 800], [400, 700]];
+  const Arr = [[260, 280], [260, 280], [150, 360], [150, 360]];
   let allPoints = ar2ptAr(Arr);
   return (
     <Arrow
@@ -39,7 +40,7 @@ export const HighlightedArrow = () => {
 };
 
 export const InversedArrow = () => {
-  const Arr = [[10, 10], [10, 10], [100, 30], [100, 100]];
+  const Arr = [[100, 100], [100, 100], [20, 20], [20, 20]];
   let allPoints = ar2ptAr(Arr);
 
   return (

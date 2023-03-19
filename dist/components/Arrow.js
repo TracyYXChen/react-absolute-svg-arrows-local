@@ -106,6 +106,8 @@ export var Arrow = function (_a) {
         var pN = ptArr[n - 1];
         //ptStr += `L ${pN[0]} ${pN[1]}`;
         ptStr += "M ".concat(pA.x, " ").concat(pA.y, " C ").concat(pA.x, " ").concat(pN.y, " ").concat(pN.x, " ").concat(pA.y, " ").concat(pN.x, " ").concat(pN.y - arrowOffset, " ");
+        //console.log(pN.y, arrowOffset);
+        //console.log(ptStr);
         return ptStr;
     };
     var xOff = startPoint.x - p1.x;
@@ -126,7 +128,11 @@ export var Arrow = function (_a) {
     };
     var markID = "arrowhead-".concat(startPoint.x, "-").concat(startPoint.y, "-").concat(endPoint.x, "-").concat(endPoint.y);
     var strokeColor = getStrokeColor();
-    return (_jsxs(_Fragment, { children: [_jsxs(CurvedLine, __assign({ width: canvasWidth, height: canvasHeight, "$isHighlighted": isHighlighted, "$showDebugGuideLines": showDebugGuideLines, "$boundingBoxColor": boundingBoxColor, "$xTranslate": canvasXOffset, "$yTranslate": canvasYOffset }, { children: [_jsx("defs", { children: _jsx("marker", __assign({ id: markID, markerWidth: "6", markerHeight: "8", refX: "0", refY: "4", orient: "auto" }, { children: _jsx("polygon", { points: "0 0, 6 4, 0 8", fill: arrowColor }) })) }), _jsx(RenderedLine, { d: curvedLinePath, 
+    var orient = "90";
+    if (endPoint.y < startPoint.y) {
+        orient = "-90";
+    }
+    return (_jsxs(_Fragment, { children: [_jsxs(CurvedLine, __assign({ width: canvasWidth, height: canvasHeight, "$isHighlighted": isHighlighted, "$showDebugGuideLines": showDebugGuideLines, "$boundingBoxColor": boundingBoxColor, "$xTranslate": canvasXOffset, "$yTranslate": canvasYOffset }, { children: [_jsx("defs", { children: _jsx("marker", __assign({ id: markID, markerWidth: "6", markerHeight: "8", refX: "0", refY: "4", orient: orient }, { children: _jsx("polygon", { points: "0 0, 6 4, 0 8", fill: arrowColor }) })) }), _jsx(RenderedLine, { d: curvedLinePath, 
                         //d={`M ${startPoint.x} ${startPoint.y} L ${endPoint.x} ${endPoint.y}`}
                         strokeWidth: strokeWidth, stroke: getStrokeColor(), fill: "none", markerEnd: "url(#".concat(markID, ")") }), _jsx(HoverableLine, __assign({ d: curvedLinePath, 
                         //d={`M ${startPoint.x} ${startPoint.y} L ${endPoint.x} ${endPoint.y}`}

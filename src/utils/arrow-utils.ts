@@ -59,8 +59,20 @@ export const calculateDeltas = (
   absDx: number;
   absDy: number;
 } => {
-  const dx = Math.max(...pointsArray.map(obj => obj.x)) - Math.min(...pointsArray.map(obj => obj.x));
-  const dy = Math.max(...pointsArray.map(obj => obj.y)) - Math.min(...pointsArray.map(obj => obj.y));
+  const arrX = pointsArray.map(obj => obj.x);
+  const arrY = pointsArray.map(obj => obj.y);
+  const maxX = Math.max(...arrX);
+  const minX = Math.min(...arrX);
+  const xMaxInd = arrX.indexOf(maxX);
+  const xMinInd = arrX.indexOf(minX);
+
+  const maxY = Math.max(...arrY);
+  const minY = Math.min(...arrY);
+  const yMaxInd = arrY.indexOf(maxY);
+  const yMinInd = arrY.indexOf(minY);
+  const dx = xMaxInd > xMinInd? maxX - minX: minX - maxX;
+  const dy = yMaxInd > yMinInd? maxY - minY: minY - maxY;
+  //console.log(yMaxInd, yMinInd, dx, dy);
   const absDx = Math.abs(dx);
   const absDy = Math.abs(dy);
 

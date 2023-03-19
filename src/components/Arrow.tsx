@@ -241,8 +241,11 @@ export const Arrow = ({
     let pN = ptArr[n-1];
     //ptStr += `L ${pN[0]} ${pN[1]}`;
     ptStr += `M ${pA.x} ${pA.y} C ${pA.x} ${pN.y} ${pN.x} ${pA.y} ${pN.x} ${pN.y - arrowOffset} `;
+    //console.log(pN.y, arrowOffset);
+    //console.log(ptStr);
     return ptStr;
   }
+  
 
 
   let xOff = startPoint.x - p1.x;
@@ -257,6 +260,7 @@ export const Arrow = ({
 
   curvedLinePath = getBezierPath(transformedPoints);
   
+  
   const getStrokeColor = () => {
     if (isHighlighted) return arrowHighlightedColor;
 
@@ -265,6 +269,10 @@ export const Arrow = ({
   
   const markID = `arrowhead-${startPoint.x}-${startPoint.y}-${endPoint.x}-${endPoint.y}`;
   const strokeColor = getStrokeColor();
+  let orient = "90";
+  if(endPoint.y < startPoint.y) {
+    orient = "-90";
+  }
 
   return (
     <>
@@ -278,7 +286,7 @@ export const Arrow = ({
         $yTranslate={canvasYOffset}
       >
         <defs>
-          <marker id={markID} markerWidth="6" markerHeight="8" refX="0" refY="4" orient="auto">
+          <marker id={markID} markerWidth="6" markerHeight="8" refX="0" refY="4" orient={orient}>
                <polygon points="0 0, 6 4, 0 8" fill={arrowColor}></polygon>
           </marker>
         </defs> 
