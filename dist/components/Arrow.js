@@ -85,11 +85,12 @@ export var Arrow = function (_a) {
         absDy: absDy,
         boundingBoxBuffer: boundingBoxBuffer,
     }), canvasWidth = _f.canvasWidth, canvasHeight = _f.canvasHeight;
-    var canvasXOffset = Math.min(startPoint.x, endPoint.x) - boundingBoxBuffer.horizontal;
-    var canvasYOffset = Math.min(startPoint.y, endPoint.y) - boundingBoxBuffer.vertical;
-    //console.log(canvasXOffset, canvasYOffset);
-    // const curvedLinePath = `
-    // M ${p1.x} ${p1.y} C ${p4.x} ${p1.y} ${p1.x} ${p4.y} ${p4.x} ${p4.y}`;
+    var arrX = allPoints.map(function (obj) { return obj.x; });
+    var arrY = allPoints.map(function (obj) { return obj.y; });
+    var minX = Math.min.apply(Math, arrX);
+    var minY = Math.min.apply(Math, arrY);
+    var canvasXOffset = minX - boundingBoxBuffer.horizontal;
+    var canvasYOffset = minY - boundingBoxBuffer.vertical;
     var curvedLinePath;
     var arrowHeadHeight = 8;
     var arrowOffset = arrowHeadHeight + strokeWidth;
@@ -106,18 +107,20 @@ export var Arrow = function (_a) {
         var pN = ptArr[n - 1];
         //ptStr += `L ${pN[0]} ${pN[1]}`;
         ptStr += "M ".concat(pA.x, " ").concat(pA.y, " C ").concat(pA.x, " ").concat(pN.y, " ").concat(pN.x, " ").concat(pA.y, " ").concat(pN.x, " ").concat(pN.y - arrowOffset, " ");
-        //console.log(pN.y, arrowOffset);
-        //console.log(ptStr);
         return ptStr;
     };
-    var xOff = startPoint.x - p1.x;
-    var yOff = startPoint.y - p1.y;
+    // let xOff = startPoint.x - p1.x;
+    // let yOff = startPoint.y - p1.y;
     var transformedPoints = [];
+    // console.log(p1, p2, p3, p4);
+    // console.log(startPoint, endPoint);
+    // console.log(canvasXOffset, canvasYOffset);
+    // console.log(xOff, yOff);
     for (var _i = 0, allPoints_1 = allPoints; _i < allPoints_1.length; _i++) {
         var pt = allPoints_1[_i];
         transformedPoints.push({
-            x: pt.x - xOff,
-            y: pt.y - yOff
+            x: pt.x - canvasXOffset,
+            y: pt.y - canvasYOffset
         });
     }
     curvedLinePath = getBezierPath(transformedPoints);

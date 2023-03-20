@@ -25,9 +25,10 @@ var ar2ptAr = function (arr) {
     return allPoints;
 };
 export var HighlightedArrow = function () {
-    //const Arr = [[82, 10], [82, 10], [58, 18], [58, 47], [34, 55], [34, 55]];
+    var Arr = [[82, 10], [82, 10], [58, 18], [58, 47], [34, 55], [34, 55]];
     //const Arr = [[200, 600], [200, 600], [500, 800], [400, 700]];
-    var Arr = [[260, 280], [260, 280], [150, 360], [150, 360]];
+    //const Arr = [[260, 280], [260, 280], [150, 360], [150, 360]];
+    //const Arr = [[382, 640], [382, 640], [460, 720], [460, 820], [305, 900], [305, 900]];
     var allPoints = ar2ptAr(Arr);
     return (_jsx(Arrow, { allPoints: allPoints, isHighlighted: isHighlighted(true), showDebugGuideLines: showDebugGuideLines(), config: { arrowColor: 'red' } }));
 };

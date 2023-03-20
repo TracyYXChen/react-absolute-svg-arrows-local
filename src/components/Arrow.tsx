@@ -217,14 +217,14 @@ export const Arrow = ({
     absDy,
     boundingBoxBuffer,
   });
+  
+  const arrX = allPoints.map(obj => obj.x);
+  const arrY = allPoints.map(obj => obj.y);
+  const minX = Math.min(...arrX);
+  const minY = Math.min(...arrY);
 
-  const canvasXOffset =
-    Math.min(startPoint.x, endPoint.x) - boundingBoxBuffer.horizontal;
-  const canvasYOffset =
-    Math.min(startPoint.y, endPoint.y) - boundingBoxBuffer.vertical;
-  //console.log(canvasXOffset, canvasYOffset);
-  // const curvedLinePath = `
-  // M ${p1.x} ${p1.y} C ${p4.x} ${p1.y} ${p1.x} ${p4.y} ${p4.x} ${p4.y}`;
+  const canvasXOffset = minX - boundingBoxBuffer.horizontal;
+  const canvasYOffset = minY - boundingBoxBuffer.vertical;
   let curvedLinePath;
   let arrowHeadHeight = 8;
   let arrowOffset = arrowHeadHeight + strokeWidth;
@@ -241,20 +241,22 @@ export const Arrow = ({
     let pN = ptArr[n-1];
     //ptStr += `L ${pN[0]} ${pN[1]}`;
     ptStr += `M ${pA.x} ${pA.y} C ${pA.x} ${pN.y} ${pN.x} ${pA.y} ${pN.x} ${pN.y - arrowOffset} `;
-    //console.log(pN.y, arrowOffset);
-    //console.log(ptStr);
     return ptStr;
   }
   
 
 
-  let xOff = startPoint.x - p1.x;
-  let yOff = startPoint.y - p1.y;
+  // let xOff = startPoint.x - p1.x;
+  // let yOff = startPoint.y - p1.y;
   let transformedPoints = [];
+  // console.log(p1, p2, p3, p4);
+  // console.log(startPoint, endPoint);
+  // console.log(canvasXOffset, canvasYOffset);
+  // console.log(xOff, yOff);
   for(let pt of allPoints) {
     transformedPoints.push({
-      x: pt.x - xOff,
-      y: pt.y - yOff
+      x: pt.x - canvasXOffset,
+      y: pt.y - canvasYOffset
     });
   }
 
